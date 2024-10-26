@@ -1,0 +1,38 @@
+{
+    "agile": {
+        "terminology": {
+            "deliverable": {
+                "definition": "A deliverable is a tangible or intangible object produced as a result of the project that is intended to be delivered to a customer (either internal or external).",
+                "abbreviation": "Del",
+                "letterAbbreviation": "D",
+                "displayProperties": {
+                    "color": "#FF0000"
+                }
+            },
+            "project": {
+                "definition": "An overarching initiative with a defined scope and goal, broken down into smaller managable \"sprints\" in Agile methodologies.",
+                "abbreviation": "P",
+                "letterAbbreviation": "P",
+                "displayProperties": {
+                    "color": "#00FF00"
+                }
+            },
+            "story": {
+                "definition": "A story is a small, specific requirement that is part of a project. Stories are used in Agile methodologies to break down the work into small, manageable pieces.",
+                "abbreviation": "St",
+                "letterAbbreviation": "S",
+                "displayProperties": {
+                    "color": "#0000FF"
+                }
+            },
+            "task": {
+                "definition": "A task is a specific unit of work that needs to be completed as part of a story.",
+                "abbreviation": "T",
+                "letterAbbreviation": "T",
+                "displayProperties": {
+                    "color": "#FF00FF"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Design Scaffold of the project"
+    },
+    {
+      "id": 2,
+      "name": "Build Basic Structure"
+    },
+    {
+      "id": 3,
+      "name": "Get basic functions working"
+    },
+    {
+      "id": 4,
+      "name": "Demo with Leadership"
+    }
+  ],
+  "taskDurations": [
+    {
+      "id": 1,
+      "start": "2024-10-24",
+      "end": "2024-10-25",
+      "task": 1
+    },
+    {
+      "id": 2,
+      "start": "2024-10-28",
+      "end": "2024-11-01",
+      "task": 2
+    },
+    {
+      "id": 3,
+      "start": "2024-11-04",
+      "end": "2024-11-07",
+      "task": 3
+    },
+    {
+      "id": 4,
+      "start": "2024-11-08",
+      "end": "2024-11-08",
+      "task": 4
+    }
+  ]
+}
