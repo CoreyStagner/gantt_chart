@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import { client } from '../../utils/fetchWrapper';
+
 import {
   monthDiff,
   getDaysInMonth,
@@ -17,6 +18,7 @@ export default function TimeTable({
   taskDurations,
   setTaskDurations,
 }) {
+  const containerRef = useRef(null);
   const [taskDurationElDraggedId, setTaskDurationElDraggedId] = useState(null);
   const [sprintDateRanges, setSprintDateRanges] = useState([]);
   const currentDate = getDateTimeObject();
@@ -34,7 +36,7 @@ export default function TimeTable({
       gridAutoColumns: 'minmax(30px, 1fr)',
       outline: '0.5px solid var(--color-outline)',
       textAlign: 'center',
-      height: 'var(--cell-height)',
+      minHeight: 'var(--min-cell-height)',
     },
     ganttTimePeriodSpan: {
       margin: 'auto',
@@ -46,7 +48,7 @@ export default function TimeTable({
     },
     taskDuration: {
       position: 'absolute',
-      height: 'calc(var(--cell-height) - 1px)',
+      minHeight: 'calc(var(--min-cell-height) - 1px)',
       zIndex: '1',
       background:
         'linear-gradient(90deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%)',
@@ -67,78 +69,103 @@ export default function TimeTable({
   );
 
   // TODO: get this from the project files
-  let sprintData = {
-    sprintLength: 14,
-    sprintLengthUnit: 'days',
-    sprintStartDay: 1,
-    sprintStartMonth: 1,
-    sprintStartYear: 2024,
-    sprintNamePrefix: 'Sprint - ',
-  };
-
-  const createSprintDates = (customSprintData) => {
-    let sprintConfig = customSprintData || sprintData;
-    let sprintDates = [];
-    // Create the first date to start create sprints from
-    let yearStart = new Date(
-      sprintConfig.sprintStartYear,
-      sprintConfig.sprintStartMonth - 1, // since it is 0 indexed
-      sprintConfig.sprintStartDay
-    );
-    // Start on the day of the sprint year with the first sprint
-    let sprintStart = new Date(yearStart);
-    let sprintStartMod = new Date(sprintStart);
-    let sprintEnd = new Date(
-      sprintStartMod.setDate(
-        sprintStartMod.getDate() + sprintConfig.sprintLength - 1
-      )
-    );
-    let sprintEndMod = new Date(sprintEnd);
-    sprintDates.push({
-      i: 1,
-      start: sprintStart,
-      end: sprintEnd,
-    });
-    // iterate over 25 more times for the moment
-    for (let i = 1; i < 26; i++) {
-      const { start, end } = JSON.parse(
-        JSON.stringify(sprintDates[sprintDates.length - 1])
-      );
-      // create mutabable copies of the start and end dates
-      const startDate = new Date(start);
-      const endDate = new Date(end);
-      // Create the new start and end date objects
-      const newStart = new Date(
-        startDate.setDate(startDate.getDate() + sprintConfig.sprintLength)
-      );
-      const newEnd = new Date(
-        endDate.setDate(endDate.getDate() + sprintConfig.sprintLength)
-      );
-      // push the new sprint object to the sprintDates array
-      sprintDates.push({
-        i: i + 1,
-        start: newStart,
-        end: newEnd,
-      });
-    }
-    setSprintDateRanges(sprintDates);
-  };
-
   useEffect(() => {
+    let sprintData = {
+      sprintLength: 14,
+      sprintLengthUnit: 'days',
+      sprintStartDay: 1,
+      sprintStartMonth: 1,
+      sprintStartYear: 2024,
+      sprintNamePrefix: 'Sprint - ',
+    };
+
+    const createSprintDates = (customSprintData) => {
+      let sprintConfig = customSprintData || sprintData;
+      let sprintDates = [];
+      // Create the first date to start create sprints from
+      let yearStart = new Date(
+        sprintConfig.sprintStartYear,
+        sprintConfig.sprintStartMonth - 1, // since it is 0 indexed
+        sprintConfig.sprintStartDay
+      );
+      // Start on the day of the sprint year with the first sprint
+      let sprintStart = new Date(yearStart);
+      let sprintStartMod = new Date(sprintStart);
+      let sprintEnd = new Date(
+        sprintStartMod.setDate(
+          sprintStartMod.getDate() + sprintConfig.sprintLength - 1
+        )
+      );
+      let sprintEndMod = new Date(sprintEnd);
+      sprintDates.push({
+        i: 1,
+        start: sprintStart,
+        end: sprintEnd,
+      });
+      // iterate over 25 more times for the moment
+      for (let i = 1; i < 26; i++) {
+        const { start, end } = JSON.parse(
+          JSON.stringify(sprintDates[sprintDates.length - 1])
+        );
+        // create mutabable copies of the start and end dates
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        // Create the new start and end date objects
+        const newStart = new Date(
+          startDate.setDate(startDate.getDate() + sprintConfig.sprintLength)
+        );
+        const newEnd = new Date(
+          endDate.setDate(endDate.getDate() + sprintConfig.sprintLength)
+        );
+        // push the new sprint object to the sprintDates array
+        sprintDates.push({
+          i: i + 1,
+          start: newStart,
+          end: newEnd,
+        });
+      }
+      setSprintDateRanges(sprintDates);
+    };
+
     createSprintDates();
+    updateCellHeights();
   }, []);
 
+  /**
+   * Find the sprint that this date belongs in.
+   *
+   * @param {Number} year day's year
+   * @param {Number} month day's month
+   * @param {Number} day day's day
+   * @returns {Number} sprint number
+   */
   const determineSprint = (year, month, day) => {
     const testingDate = new Date(year, month, day);
     // make sure that we have a length of sprintDateRanges
     if (!sprintDateRanges?.length) return;
+    // find the sprint that the date falls within
     const foundSprint = sprintDateRanges.filter(
       (sprint) => sprint.start <= testingDate && sprint.end >= testingDate
     );
     // Deconstruct the sprint id number
     let sprint = foundSprint[0]?.i;
+    // return the sprint number if sprint is found
     if (!sprint) return;
     return sprint;
+  };
+
+  const updateCellHeights = () => {
+    // const toChange = containerRef.current.querySelectorAll('.task_row_content');
+    // toChange.forEach((el) => {
+    //   // find relevant header
+    //   const target = el.classList[1].split('-')[1];
+    //   if (!target) {
+    //     console.error('No target found');
+    //   }
+    //   console.log('target row', target);
+    //   // const header = headerRef.querySelector(`.task_row_header-${target}`);
+    //   // console.log(header);
+    // });
   };
 
   const numMonths = monthDiff(startMonth, endMonth) + 1;
@@ -172,6 +199,12 @@ export default function TimeTable({
     const currMonth = month.getMonth() + 1;
 
     for (let j = 1; j <= numDays; j++) {
+      let mnth = new Date(startMonth);
+      const curYear = mnth.getFullYear();
+      const curMonth = mnth.getMonth() + 1;
+      // color weekend cells differently
+      const dayOfTheWeek = getDayOfWeek(curYear, curMonth - 1, j - 1);
+
       // Create Day of the Month cells
       dayRow.push(
         <div
@@ -185,14 +218,21 @@ export default function TimeTable({
           data-day={j}
           style={{
             ...styles.ganttTimePeriod,
-            outline: '1px solid #00000033', // TODO: Create constant for this color
+            outline: '1px solid var(--color-transparent-33)', // TODO: Create constant for this color
             backgroundColor:
-              determineSprint(month.getFullYear(), startMonth.getMonth(), j) %
-                2 ===
-              0
-                ? '#bababa' // TODO: Create constant for this color
-                : '#979797', // TODO: Create constant for this color
-            color: '#ffffff', // TODO: Create constant for this color
+              j === currentDate.day &&
+              startMonth.getMonth() + 1 + i === currentDate.month
+                ? 'var(--color-red-transparent-33)' // TODO: Create constant for this color
+                : determineSprint(
+                    month.getFullYear(),
+                    startMonth.getMonth(),
+                    j
+                  ) %
+                    2 ===
+                  0
+                ? 'var(--color-gray-500)' // TODO: Create constant for this color
+                : 'var(--color-gray-400)', // TODO: Create constant for this color
+            color: 'var(--color-black)', // TODO: Create constant for this color
           }}
         >
           <span style={styles.ganttTimePeriodSpan}>{j}</span>
@@ -206,14 +246,14 @@ export default function TimeTable({
           data-month={startMonth.getMonth() + 1}
           style={{
             ...styles.ganttTimePeriod,
-            outline: '1px solid #00000033', // TODO: Create constant for this color
+            outline: '1px solid var(--color-transparent-33)', // TODO: Create constant for this color
             fontSize: '0.5rem',
           }}
         >
           <span
             style={{
               ...styles.ganttTimePeriodSpan,
-              color: '#3E455B', // TODO: Create constant for this color
+              color: 'var(--color-gray-600)', // TODO: Create constant for this color
             }}
           >
             {getDayOfWeek(currYear, currMonth - 1, j - 1)}
@@ -277,10 +317,10 @@ export default function TimeTable({
                 backgroundColor:
                   j === currentDate.day &&
                   startMonth.getMonth() + 1 + i === currentDate.month
-                    ? '#ff000033' // TODO: Create constant for this color
+                    ? 'var(--color-red-transparent-33)' // TODO: Create constant for this color
                     : dayOfTheWeek === 'S'
                     ? 'var(--color-tertiary)'
-                    : '#fff', // TODO: Create constant for this color
+                    : 'var(--color-white)', // TODO: Create constant for this color
               }}
               data-task={task?.id}
               data-month={startMonth.getMonth() + 1}
@@ -304,9 +344,19 @@ export default function TimeTable({
                         )} * 100% - 1px)`,
                         opacity:
                           taskDurationElDraggedId === el?.id ? '0.5' : '1',
+                        color: 'white',
+                        fontSize: '0.75rem',
+                        display: 'flex',
+                        alignItems: 'top',
+                        justifyContent: 'center',
+                        overflow: 'hidden',
                       }}
+                      onDoubleClick={(e) => console.log('Double Clicked', e)}
+                      onClick={(e) => viewTask(e, el?.id)}
                       onKeyDown={(e) => deleteTaskDuration(e, el?.id)}
-                    ></div>
+                    >
+                      {task?.name}
+                    </div>
                   );
                 }
               })}
@@ -315,7 +365,11 @@ export default function TimeTable({
         }
 
         taskRows.push(
-          <div key={`${i}-${task?.id}`} style={styles.ganttTimePeriod}>
+          <div
+            key={i + '-' + task.id}
+            className={`task_row_content task_row_content-${task.id}`}
+            style={styles.ganttTimePeriod}
+          >
             {taskRow}
           </div>
         );
@@ -324,6 +378,10 @@ export default function TimeTable({
         mnth.setMonth(mnth.getMonth() + 1);
       }
     });
+  }
+
+  function viewTask(e, id) {
+    console.log('view task', id);
   }
 
   function deleteTaskDuration(e, id) {
@@ -387,13 +445,14 @@ export default function TimeTable({
         currentDate.day +
         '"]'
     );
-    if (currentDateDiv) {
-      currentDateDiv.style.backgroundColor = '#ff000033'; // TODO: Create constant for this color
-    }
+    // if (currentDateDiv) {
+    //   currentDateDiv.style.backgroundColor = 'var(--color-red-transparent-33)'; // TODO: Create constant for this color
+    // }
   }
 
   return (
     <div
+      ref={containerRef}
       id="gantt-grid-container__time"
       style={{ gridTemplateColumns: `repeat(${numMonths}, 1fr)` }}
     >
@@ -421,8 +480,8 @@ export default function TimeTable({
 
         .taskDuration {
           position: absolute;
-          height: calc(var(--cell-height) / 3);
-          top: calc(var(--cell-height) / 3);
+          minheight: calc(var(--min-cell-height) / 3);
+          top: calc(var(--min-cell-height) / 3);
           z-index: 1;
           background: linear-gradient(
             90deg,

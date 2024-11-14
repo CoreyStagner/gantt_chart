@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.2.3",
+    "@babel/core": "^7.26.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
+    "next": "^12.3.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

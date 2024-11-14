@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddButton from './AddButton';
+import Button from './Button';
 
 export default function AddTaskDuration({ tasks, setTaskDurations }) {
   const [task, setTask] = useState('');
@@ -88,6 +89,7 @@ export default function AddTaskDuration({ tasks, setTaskDurations }) {
         </fieldset>
       </div>
       <AddButton />
+      <Button textContent="Add Task" />
       <style jsx>{`
         #add-task-duration {
           margin-right: 10px;

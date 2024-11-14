@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddButton from './AddButton';
+import Button from './Button';
 
 export default function AddTask({ setTasks }) {
   const [task, setTask] = useState('');
@@ -34,6 +35,7 @@ export default function AddTask({ setTasks }) {
       <h2>Add Task</h2>
       <input value={task} onChange={onChange} placeholder="add task name" />
       <AddButton />
+      <Button textContent="Add Task" />
       <style jsx>{`
         #add-task {
           margin-right: 10px;
@@ -43,7 +45,7 @@ export default function AddTask({ setTasks }) {
         }
 
         input {
-          height: var(--cell-height);
+          min-height: var(--min-cell-height);
           margin-top: 21px;
           margin-bottom: 21px;
         }

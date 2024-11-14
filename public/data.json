@@ -1,4 +1,22 @@
 {
+  "deliverables": [
+    {
+      "id": 1,
+      "name": "Deliverable 1"
+    },
+    {
+      "id": 2,
+      "name": "Deliverable 2"
+    },
+    {
+      "id": 3,
+      "name": "Deliverable 3"
+    },
+    {
+      "id": 4,
+      "name": "Deliverable 4"
+    }
+  ],
   "tasks": [
     {
       "id": 1,
