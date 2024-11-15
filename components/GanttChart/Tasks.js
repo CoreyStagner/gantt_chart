@@ -19,6 +19,10 @@ export default function Tasks({
   const [modalData, setModalData] = useState(undefined);
   const [modalID, setModalID] = useState(undefined);
 
+  /**
+   * Handle deleting a task event
+   * @param {*} e
+   */
   function handleDelete(e) {
     const idNum = parseInt(e.target.getAttribute('data-task-id'));
     const newTasks = tasks.filter((task) => task.id !== idNum);
@@ -34,12 +38,25 @@ export default function Tasks({
     });
   }
 
+  /**
+   * Handle editing a task event
+   * @param {*} e
+   */
   function handleEdit(e) {
     setModalID('taskEditModal');
     setModalData({ target: e.target.getAttribute('data-task-id') });
     setShowModal(true);
   }
 
+  /**
+   * NOTE: No longer used
+   * Handle changing a task name
+   *
+   * TODO: Will get moved to a modal for all of these updates
+   *
+   * @param {*} e
+   * @param {*} i
+   */
   function onChange(e, i) {
     const { value } = e.target;
     const idNum = parseInt(e.target.getAttribute('data-task-id'));
@@ -52,6 +69,11 @@ export default function Tasks({
     setTasks(newTasks);
   }
 
+  /**
+   * Handle the modal state
+   *
+   * @param {*} val
+   */
   function handleModalState(val) {
     if (!val) {
       setShowModal(val);
@@ -111,6 +133,15 @@ export default function Tasks({
     }
   }
 
+  /**
+   * Handle the task selection change based on the dropdown
+   *
+   * @param {*} data
+   */
+  function handleTaskSelectionChange(data) {
+    if (onFilter) onFilter(data);
+  }
+
   useEffect(() => {
     if (inputRef.current.length && indexRef.current >= 0) {
       inputRef?.current[indexRef.current]?.focus();
@@ -121,12 +152,9 @@ export default function Tasks({
     setUpdatedTasks(tasks);
   }, [setUpdatedTasks, tasks]);
 
-  function handleTaskSelectionChange(data) {
-    if (onFilter) onFilter(data);
-  }
-
   return (
     <div id="gantt-grid-container__tasks" ref={headerRef}>
+      {/* NOTE: Still in progress */}
       <Modal
         options={{
           isOpen: showModal,
@@ -135,11 +163,14 @@ export default function Tasks({
         }}
         handleOpenChange={handleModalState}
       />
+      {/* Dropdown to filter based on taskType */}
       <div className="gantt-task-row">
         <Select onChange={handleTaskSelectionChange} />
       </div>
+      {/* Spacer DIVs, need to clean up */}
       <div className="gantt-task-row"></div>
       <div className="gantt-task-row"></div>
+      {/* Iterate over the filtered tasks to display only what is intended */}
       {updatedTasks &&
         updatedTasks.map((tsk, i) => (
           <div
@@ -147,12 +178,6 @@ export default function Tasks({
             id={`task_row_header task_row_header-${tsk?.id}`}
             className="gantt-task-row"
           >
-            {/* <input
-              data-task-id={tsk?.id}
-              value={tsk?.name}
-              onChange={(e) => onChange(e, i)}
-              ref={(el) => (inputRef.current[i] = el)}
-            /> */}
             <Button
               modifier="icon_eye"
               className="focusTask"
@@ -182,7 +207,7 @@ export default function Tasks({
             </button>
           </div>
         ))}
-
+      {/* Style Logic for this component TODO: move to stylized components rather than this */}
       <style jsx>{`
         #gantt-grid-container__tasks {
           outline: 0.5px solid var(--color-outline);
