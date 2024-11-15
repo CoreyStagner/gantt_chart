@@ -20,18 +20,22 @@
   "tasks": [
     {
       "id": 1,
+      "taskType": 1,
       "name": "Design Scaffold of the project"
     },
     {
       "id": 2,
+      "taskType": 1,
       "name": "Build Basic Structure"
     },
     {
       "id": 3,
+      "taskType": 1,
       "name": "Get basic functions working"
     },
     {
       "id": 4,
+      "taskType": 2,
       "name": "Demo with Leadership"
     }
   ],

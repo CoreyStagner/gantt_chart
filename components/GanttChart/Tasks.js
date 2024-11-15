@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Modal from './Modal';
 import Button from './Button';
+import Select from './Select';
 
 export default function Tasks({
   tasks,
@@ -9,10 +10,11 @@ export default function Tasks({
   setTaskDurations,
   handleTaskDateView,
   headerRef,
-  setHeaderRef,
+  onFilter,
 }) {
   const inputRef = useRef([]);
   const indexRef = useRef(null);
+  const [updatedTasks, setUpdatedTasks] = useState(tasks);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(undefined);
   const [modalID, setModalID] = useState(undefined);
@@ -115,6 +117,14 @@ export default function Tasks({
     }
   });
 
+  useEffect(() => {
+    setUpdatedTasks(tasks);
+  }, [setUpdatedTasks, tasks]);
+
+  function handleTaskSelectionChange(data) {
+    if (onFilter) onFilter(data);
+  }
+
   return (
     <div id="gantt-grid-container__tasks" ref={headerRef}>
       <Modal
@@ -125,11 +135,13 @@ export default function Tasks({
         }}
         handleOpenChange={handleModalState}
       />
+      <div className="gantt-task-row">
+        <Select onChange={handleTaskSelectionChange} />
+      </div>
       <div className="gantt-task-row"></div>
       <div className="gantt-task-row"></div>
-      <div className="gantt-task-row"></div>
-      {tasks &&
-        tasks.map((tsk, i) => (
+      {updatedTasks &&
+        updatedTasks.map((tsk, i) => (
           <div
             key={`${i}-${tsk?.id}-${tsk.name}`}
             id={`task_row_header task_row_header-${tsk?.id}`}

@@ -15,6 +15,7 @@ export default function GanttChart() {
   const [userProjectData, setUserProjectData] = useState(null);
   const [selection, setSelection] = useState(null);
   const [tasks, setTasks] = useState(null);
+  const [updatedTasks, setUpdatedTasks] = useState(tasks);
   const [taskDurations, setTaskDurations] = useState(null);
   const [timeRange, setTimeRange] = useState({
     fromSelectMonth: new Date().getMonth() + 0,
@@ -33,6 +34,7 @@ export default function GanttChart() {
     client('data.json').then(
       (data) => {
         setTasks(data?.tasks);
+        setUpdatedTasks(data?.tasks);
         setTaskDurations(data?.taskDurations);
       },
       (error) => {
@@ -40,6 +42,21 @@ export default function GanttChart() {
       }
     );
   }, []);
+
+  function handleFilterTasks(data) {
+    const [taskTypeID, taskTypeName] = data.split('-');
+    if (!taskTypeID || data === 'all') {
+      setUpdatedTasks(tasks);
+    } else {
+      const filteredTasks = [];
+      tasks.forEach((task) => {
+        if (task.taskType == +taskTypeID) {
+          filteredTasks.push(task);
+        }
+      });
+      setUpdatedTasks(filteredTasks);
+    }
+  }
 
   function handleTaskDateView(data) {
     const { start, end } = data;
@@ -57,15 +74,16 @@ export default function GanttChart() {
     <div id="gantt-container">
       <Grid>
         <Tasks
-          tasks={tasks}
+          tasks={updatedTasks}
           taskDurations={taskDurations}
           setTasks={setTasks}
           setTaskDurations={setTaskDurations}
           handleTaskDateView={handleTaskDateView}
+          onFilter={handleFilterTasks}
         />
         <TimeTable
           timeRange={timeRange}
-          tasks={tasks}
+          tasks={updatedTasks}
           taskDurations={taskDurations}
           setTaskDurations={setTaskDurations}
         />

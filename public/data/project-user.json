@@ -34,5 +34,17 @@
                 }
             }
         }
+    },
+    "types": {
+        "task": {
+            "label": "Task",
+            "description": "A task is a basic building block of a project. It can be a simple todo or a complex part of a project.",
+            "id": 1
+        },
+        "story": {
+            "label": "Story",
+            "description": "A task is a basic building block of a project. It can be a simple todo or a complex part of a project.",
+            "id": 2
+        }
     }
 }
