@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import Modal from './Modal';
 import Button from './Button';
 import Select from './Select';
+import { client } from '../../utils/fetchWrapper';
 
 export default function Tasks({
   tasks,
@@ -14,6 +15,7 @@ export default function Tasks({
 }) {
   const inputRef = useRef([]);
   const indexRef = useRef(null);
+  const [projectData, setDefaultProjectData] = useState(undefined);
   const [updatedTasks, setUpdatedTasks] = useState(tasks);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(undefined);
@@ -97,7 +99,6 @@ export default function Tasks({
     e.preventDefault();
     e.stopPropagation();
     // If e.target is the image grab its parent element
-    console.log(e);
     let targetElement = undefined;
     if (e.target.nodeName === 'path') {
       targetElement = e.target.parentElement.parentElement;
@@ -142,12 +143,55 @@ export default function Tasks({
     if (onFilter) onFilter(data);
   }
 
+  /**
+   * From the user config get the proper task type based on what is stored in DB.
+   *
+   * @param {Number} val The Reference value for the task type
+   * @returns {String || null} The task type label or null if not found
+   */
+  function getTaskType(val) {
+    if (!projectData?.types) {
+      console.log('No Project Data types were found');
+      return null;
+    }
+    let result;
+    if (!val) {
+      console.log("A task type wasn't provided");
+      return null;
+    }
+    // Using the task definitions from the project-user.json file return label from the relative types
+    Object.values(projectData?.types).forEach((v) => {
+      if (v.id === val) result = v.label;
+    });
+
+    if (!result) {
+      console.log('A valid task type was not found');
+      return null;
+    } else {
+      return result;
+    }
+  }
+
+  // Run each time the component is loaded
   useEffect(() => {
     if (inputRef.current.length && indexRef.current >= 0) {
       inputRef?.current[indexRef.current]?.focus();
     }
   });
 
+  // Run first time the component is loaded
+  useEffect(() => {
+    client('data/project-user.json').then(
+      (data) => {
+        setDefaultProjectData(data);
+      },
+      (error) => {
+        console.error('Error: ', error);
+      }
+    );
+  }, []);
+
+  // Run when tasks are updated
   useEffect(() => {
     setUpdatedTasks(tasks);
   }, [setUpdatedTasks, tasks]);
@@ -183,6 +227,7 @@ export default function Tasks({
               className="focusTask"
               type="button"
               data={{
+                taskType: getTaskType(tsk?.taskType),
                 id: tsk.id,
               }}
               onClick={handleTaskView}

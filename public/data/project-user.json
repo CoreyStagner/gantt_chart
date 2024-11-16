@@ -45,6 +45,11 @@
             "label": "Story",
             "description": "A task is a basic building block of a project. It can be a simple todo or a complex part of a project.",
             "id": 2
+        },
+        "deliverable": {
+            "label": "Deliverable",
+            "description": "A deliverable is a tangible or intangible object produced as a result of the project that is intended to be delivered to a customer (either internal or external).",
+            "id": 3
         }
     }
 }
