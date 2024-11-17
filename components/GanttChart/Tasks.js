@@ -196,6 +196,8 @@ export default function Tasks({
     setUpdatedTasks(tasks);
   }, [setUpdatedTasks, tasks]);
 
+  console.log('updatedTasks', updatedTasks);
+
   return (
     <div id="gantt-grid-container__tasks" ref={headerRef}>
       {/* NOTE: Still in progress */}
@@ -217,40 +219,81 @@ export default function Tasks({
       {/* Iterate over the filtered tasks to display only what is intended */}
       {updatedTasks &&
         updatedTasks.map((tsk, i) => (
-          <div
-            key={`${i}-${tsk?.id}-${tsk.name}`}
-            id={`task_row_header task_row_header-${tsk?.id}`}
-            className="gantt-task-row"
-          >
-            <Button
-              modifier="icon_eye"
-              className="focusTask"
-              type="button"
-              data={{
-                taskType: getTaskType(tsk?.taskType),
-                id: tsk.id,
-              }}
-              onClick={handleTaskView}
+          <>
+            <div
+              key={`${i}-${tsk?.id}-${tsk.name}`}
+              id={`task_row_header task_row_header-${tsk?.id}`}
+              className="gantt-task-row"
             >
-              C
-            </Button>
-            <button
-              className="editTask"
-              type="button"
-              data-task-id={tsk?.id}
-              onClick={handleEdit}
-            >
-              {tsk?.name}
-            </button>
-            <button
-              className="deleteTask"
-              type="button"
-              data-task-id={tsk?.id}
-              onClick={handleDelete}
-            >
-              x
-            </button>
-          </div>
+              <Button
+                modifier="icon_eye"
+                className="focusTask"
+                type="button"
+                data={{
+                  taskType: getTaskType(tsk?.taskType),
+                  id: tsk.id,
+                }}
+                onClick={handleTaskView}
+              >
+                C
+              </Button>
+              <button
+                className="editTask"
+                type="button"
+                data-task-id={tsk?.id}
+                onClick={handleEdit}
+              >
+                {tsk?.name}
+              </button>
+              <button
+                className="deleteTask"
+                type="button"
+                data-task-id={tsk?.id}
+                onClick={handleDelete}
+              >
+                x
+              </button>
+            </div>
+            {tsk.children?.map((child, i) => {
+              console.log('child', child);
+              return (
+                <div
+                  key={`${i}-${tsk?.id}-${child.id}-${child.name}`}
+                  id={`task_row_header task_row_header-${task.id}-${child?.id}`}
+                  className="gantt-task-row"
+                >
+                  <Button
+                    modifier="icon_eye"
+                    className="focusTask"
+                    type="button"
+                    data={{
+                      taskType: getTaskType(child?.taskType),
+                      id: child.id,
+                    }}
+                    onClick={handleTaskView}
+                  >
+                    C
+                  </Button>
+                  <button
+                    className="editTask"
+                    type="button"
+                    data-task-id={child?.id}
+                    onClick={handleEdit}
+                  >
+                    {child?.name}
+                  </button>
+                  <button
+                    className="deleteTask"
+                    type="button"
+                    data-task-id={child?.id}
+                    onClick={handleDelete}
+                  >
+                    x
+                  </button>
+                </div>
+              );
+            })}
+          </>
         ))}
       {/* Style Logic for this component TODO: move to stylized components rather than this */}
       <style jsx>{`

@@ -22,7 +22,31 @@
       "id": 1,
       "deliverableId": 1,
       "taskType": 1,
-      "name": "Design Scaffold of the project"
+      "name": "Design Scaffold of the project",
+      "children": [
+        {
+          "id": 5,
+          "deliverableId": 1,
+          "taskType": 2,
+          "name": "Child Story 1"
+        },
+        {
+          "id": 6,
+          "deliverableId": 1,
+          "taskType": 2,
+          "name": "Child Story 2",
+          "dependencies": [
+            {
+              "id": 5
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": 2
+        }
+      ]
     },
     {
       "id": 2,
@@ -67,6 +91,12 @@
       "start": "2024-11-08",
       "end": "2024-11-08",
       "task": 4
+    },
+    {
+      "id": 5,
+      "start": "2024-10-17",
+      "end": "2024-11-18",
+      "task": 1
     }
   ]
 }
