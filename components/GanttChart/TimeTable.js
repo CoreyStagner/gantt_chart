@@ -365,13 +365,71 @@ export default function TimeTable({
         }
 
         taskRows.push(
-          <div
-            key={i + '-' + task.id}
-            className={`task_row_content task_row_content-${task.id}`}
-            style={styles.ganttTimePeriod}
-          >
-            {taskRow}
-          </div>
+          <>
+            <div
+              key={i + '-' + task.id}
+              className={`task_row_content task_row_content-${task.id}`}
+              style={styles.ganttTimePeriod}
+            >
+              {taskRow}
+            </div>
+            {task.children?.map((child) => {
+              return (
+                <div
+                  key={`child_task-${child.id}-${i}`}
+                  // style={{
+                  //   ...styles.ganttTimePeriodCell,
+                  //   backgroundColor:
+                  //     j === currentDate.day &&
+                  //     startMonth.getMonth() + 1 + i === currentDate.month
+                  //       ? 'var(--color-red-transparent-33)' // TODO: Create constant for this color
+                  //       : dayOfTheWeek === 'S'
+                  //       ? 'var(--color-tertiary)'
+                  //       : 'var(--color-white)', // TODO: Create constant for this color
+                  // }}
+                  // data-task={task?.id}
+                  // data-month={startMonth.getMonth() + 1}
+                  // data-day={j}
+                  // data-date={formattedDate}
+                  // onDrop={onTaskDurationDrop}
+                >
+                  {taskDurations.map((el, i) => {
+                    if (el?.task === child?.id) {
+                      console.log('el', el, child);
+                      return (
+                        <div
+                          key={`${i}-${el?.id}`}
+                          // draggable="true"
+                          // tabIndex="0"
+                          // onDragStart={() => handleDragStart(el?.id)}
+                          // style={{
+                          //   ...styles.taskDuration,
+                          //   width: `calc(${dayDiff(
+                          //     el?.start,
+                          //     el?.end
+                          //   )} * 100% - 1px)`,
+                          //   opacity:
+                          //     taskDurationElDraggedId === el?.id ? '0.5' : '1',
+                          //   color: 'white',
+                          //   fontSize: '0.75rem',
+                          //   display: 'flex',
+                          //   alignItems: 'top',
+                          //   justifyContent: 'center',
+                          //   overflow: 'hidden',
+                          // }}
+                          // onDoubleClick={(e) => console.log('Double Clicked', e)}
+                          // onClick={(e) => viewTask(e, el?.id)}
+                          // onKeyDown={(e) => deleteTaskDuration(e, el?.id)}
+                        >
+                          {child?.name}
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              );
+            })}
+          </>
         );
 
         taskRow = [];
