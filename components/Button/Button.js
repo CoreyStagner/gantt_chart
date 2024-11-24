@@ -1,6 +1,6 @@
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-export default function Button(options) {
+const Button = (options) => {
   const { style, type, data, textContent, modifier, onClick } = options;
   // Build Style attributes for the button
   const evalStyle = `
@@ -70,4 +70,6 @@ export default function Button(options) {
       </button>
     );
   }
-}
+};
+
+export { Button };

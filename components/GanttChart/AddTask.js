@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import AddButton from './AddButton';
-import Button from './Button';
+import { Button } from './../Button/Button';
 
 export default function AddTask({ setTasks }) {
   const [task, setTask] = useState('');

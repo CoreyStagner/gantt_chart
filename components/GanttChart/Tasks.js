@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Modal from './Modal';
-import Button from './Button';
+import { Button } from './../Button/Button';
 import Select from './Select';
 import { client } from '../../utils/fetchWrapper';
 
@@ -196,8 +196,6 @@ export default function Tasks({
     setUpdatedTasks(tasks);
   }, [setUpdatedTasks, tasks]);
 
-  console.log('updatedTasks', updatedTasks);
-
   return (
     <div id="gantt-grid-container__tasks" ref={headerRef}>
       {/* NOTE: Still in progress */}
@@ -255,7 +253,6 @@ export default function Tasks({
               </button>
             </div>
             {tsk.children?.map((child, i) => {
-              console.log('child', child);
               return (
                 <div
                   key={`${i}-${tsk?.id}-${child.id}-${child.name}`}
