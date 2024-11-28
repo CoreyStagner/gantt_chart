@@ -34,7 +34,7 @@ export default function SelectField(config) {
   };
 
   useEffect(() => {
-    client('data/project-user.json').then(
+    client({ endpoint: 'data/project-user.json' }).then(
       (data) => {
         const { types } = data;
         const typesTuple = Object.entries(types);

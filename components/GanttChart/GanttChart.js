@@ -31,7 +31,7 @@ export default function GanttChart() {
       setDefaultProjectData(defaultProjectData);
       setUserProjectData(userProjectData);
     });
-    client('data.json').then(
+    client({ endpoint: 'data.json' }).then(
       (data) => {
         setTasks(data?.tasks);
         setUpdatedTasks(data?.tasks);

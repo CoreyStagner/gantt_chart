@@ -181,7 +181,7 @@ export default function Tasks({
 
   // Run first time the component is loaded
   useEffect(() => {
-    client('data/project-user.json').then(
+    client({ endpoint: 'data/project-user.json' }).then(
       (data) => {
         setDefaultProjectData(data);
       },
