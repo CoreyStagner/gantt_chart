@@ -106,9 +106,9 @@ export default function GanttChart() {
           | ---------------- -----------------------------------------------|
           -------------------------------------------------------------------
         */}
-        <TaskTableHeader />
+        <TaskTableHeader timeRange={timeRange} />
         {issues.map((issue, i) => (
-          <TaskRow key={i} issue={issue} />
+          <TaskRow key={i} issue={issue} timeRange={timeRange} />
         ))}
       </Grid>
       {/* <Settings>

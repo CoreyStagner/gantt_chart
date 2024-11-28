@@ -1,20 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
-import Modal from './Modal';
-import { Button } from './../Button/Button';
-import { TimeTable } from './TimeTable';
-
-import TimeRange from './TimeRange';
-import Select from './Select';
-import { client } from '../../utils/fetchWrapper';
+import { useState } from 'react';
 
 import {
   monthDiff,
   getDaysInMonth,
   getDayOfWeek,
-  createFormattedDateFromStr,
-  createFormattedDateFromDate,
   getDateTimeObject,
-  dayDiff,
 } from '../../helpers/dateFunctions';
 
 import { months } from '../../constants';
@@ -103,14 +93,14 @@ const customStyles = {
   },
 };
 
-export default function TaskRow() {
+export default function TaskTableHeader({ timeRange }) {
   const [sprintDateRanges, setSprintDateRanges] = useState([]);
-  const [timeRange, setTimeRange] = useState({
-    fromSelectMonth: new Date().getMonth() - 1,
-    fromSelectYear: new Date().getFullYear(),
-    toSelectMonth: new Date().getMonth() + 1,
-    toSelectYear: new Date().getFullYear(),
-  });
+  // const [timeRange, setTimeRange] = useState({
+  //   fromSelectMonth: new Date().getMonth() - 1,
+  //   fromSelectYear: new Date().getFullYear(),
+  //   toSelectMonth: new Date().getMonth() + 1,
+  //   toSelectYear: new Date().getFullYear(),
+  // });
 
   const currentDate = getDateTimeObject();
   if (!currentDate) {
@@ -137,8 +127,8 @@ export default function TaskRow() {
   let dayRow = [];
   let weekRows = [];
   let weekRow = [];
-  let taskRows = [];
-  let taskRow = [];
+  let TaskTableHeaders = [];
+  let TaskTableHeader = [];
 
   /**
    * Find the sprint that this date belongs in.
@@ -297,7 +287,7 @@ export default function TaskRow() {
             }}
             onDragOver={(e) => e.preventDefault()}
           >
-            {taskRows}
+            {TaskTableHeaders}
           </div>
         </div>
       </div>
