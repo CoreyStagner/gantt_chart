@@ -12,11 +12,12 @@ export default function Tasks({
   handleTaskDateView,
   headerRef,
   onFilter,
+  issues,
 }) {
   const inputRef = useRef([]);
   const indexRef = useRef(null);
   const [projectData, setDefaultProjectData] = useState(undefined);
-  const [updatedTasks, setUpdatedTasks] = useState(tasks);
+  const [updatedTasks, setUpdatedTasks] = useState(issues);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(undefined);
   const [modalID, setModalID] = useState(undefined);

@@ -12,12 +12,7 @@ import {
 } from '../../helpers/dateFunctions';
 import { months } from '../../constants';
 
-export default function TimeTable({
-  timeRange,
-  issue,
-  taskDurations,
-  // setTaskDurations,
-}) {
+export default function TimeDuration({ issue }) {
   const containerRef = useRef(null);
   const [taskDurationElDraggedId, setTaskDurationElDraggedId] = useState(null);
   const [sprintDateRanges, setSprintDateRanges] = useState([]);
@@ -508,7 +503,6 @@ export default function TimeTable({
   }
   return (
     <div
-      ref={containerRef}
       id="gantt-grid-container__time"
       style={{ gridTemplateColumns: `repeat(${numMonths}, 1fr)` }}
     >
