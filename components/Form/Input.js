@@ -46,17 +46,17 @@ const styles = `
     color: var(--color-gray-400);
   }
 
-  .form_input--primary {
+  .form_input--solid {
     background: var(--color-pink-300);
     color: white;
   }
   
-  .form_input--secondary {
+  .form_input--outline {
     background: var(--color-red-300);
     color: white;
   }
 
-  .form_input--filled {
+  .form_input--standard {
     background: var(--color-gray-300);
     color: white;
   }
@@ -115,24 +115,26 @@ export default function Input(props) {
               ? `error ${defaultClassNames.input} ${
                   props.inputAttributes.className
                 } ${
-                  // Add Classes for each variant that was passed in or it will be primary by default.
+                  // Add Classes for each variant that was passed in or it will be standard by default.
                   props.variants
                     ? props.variants
+                        .toLowerCase()
                         .split(' ')
                         .map((v) => `form_input--${v}`)
                         .join(' ')
-                    : 'form_input--primary'
+                    : 'form_input--standard'
                 }`
               : `${defaultClassNames.input} ${
                   props.inputAttributes.className
                 } ${
-                  // Add Classes for each variant that was passed in or it will be primary by default.
+                  // Add Classes for each variant that was passed in or it will be standard by default.
                   props.variants
                     ? props.variants
+                        .toLowerCase()
                         .split(' ')
                         .map((v) => `form_input--${v}`)
                         .join(' ')
-                    : 'form_input--primary'
+                    : 'form_input--standard'
                 }`
           }
           onChange={handleInputChange}
