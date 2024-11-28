@@ -78,7 +78,8 @@ const customStyles = {
 };
 
 const TimeDuration = ({ issue, timeRange }) => {
-  // creating rows
+  // TODO: Implement we can use the day for more granular viewing
+  // Configure the time range start and end months
   const startMonth = new Date(
     parseInt(timeRange.fromSelectYear),
     timeRange.fromSelectMonth
@@ -88,52 +89,14 @@ const TimeDuration = ({ issue, timeRange }) => {
     timeRange.toSelectMonth
   );
 
-  console.log(startMonth, endMonth);
-
-  // function onTaskDurationDrop(e) {
-  //   const targetCell = e.target;
-  //   // prevent adding on another taskDuration
-  //   if (!targetCell.hasAttribute('draggable')) {
-  //     // find task
-  //     const taskDuration = taskDurations.filter(
-  //       (taskDuration) => taskDuration.id === taskDurationElDraggedId
-  //     )[0];
-
-  //     const dataTask = targetCell.getAttribute('data-task');
-  //     const dataDate = targetCell.getAttribute('data-date');
-
-  //     const daysDuration = dayDiff(taskDuration.start, taskDuration.end);
-
-  //     // get new task values
-  //     // get start, calc end using daysDuration - make Date objects - change taskDurations
-  //     const newTask = parseInt(dataTask);
-  //     const newStartDate = new Date(dataDate);
-  //     let newEndDate = new Date(dataDate);
-  //     newEndDate.setDate(newEndDate.getDate() + daysDuration - 1);
-
-  //     // update taskDurations
-  //     taskDuration.task = newTask;
-  //     taskDuration.start = createFormattedDateFromDate(newStartDate);
-  //     taskDuration.end = createFormattedDateFromDate(newEndDate);
-
-  //     const newTaskDurations = taskDurations.filter(
-  //       (taskDuration) => taskDuration.id !== taskDurationElDraggedId
-  //     );
-  //     newTaskDurations.push(taskDuration);
-
-  //     // update state (if data on backend - make API request to update data)
-  //     // setTaskDurations(newTaskDurations);
-  //   }
-  //   setTaskDurationElDraggedId(null);
-  // }
-
+  // creating rows that span across each month provided in the time range
   let monthRows = [];
   const numMonths = monthDiff(startMonth, endMonth);
 
-  let mnth = new Date(startMonth);
+  let date_startMonth = new Date(startMonth);
   for (let i = 0; i <= numMonths; i++) {
-    const curYear = mnth.getFullYear();
-    const curMonth = mnth.getMonth() + 1;
+    const curYear = date_startMonth.getFullYear();
+    const curMonth = date_startMonth.getMonth() + 1;
 
     const currentDate = getDateTimeObject();
     if (!currentDate) {
@@ -152,7 +115,46 @@ const TimeDuration = ({ issue, timeRange }) => {
       const dayOfTheWeek = getDayOfWeek(curYear, curMonth - 1, j - 1);
       // add task and date data attributes
       const formattedDate = createFormattedDateFromStr(curYear, curMonth, j);
-
+      let timelineBlock = false;
+      // We will start with one and add how many days the task is so we overcome resolve that we need it to be zero indexed.
+      let dateDiff = 1;
+      if (issue.startDate && issue.endDate) {
+        const startDate = new Date(
+          createFormattedDateFromStr(
+            issue.startDate.y,
+            issue.startDate.m,
+            issue.startDate.d - 1
+          )
+        );
+        const endDate = new Date(
+          createFormattedDateFromStr(
+            issue.endDate.y,
+            issue.endDate.m,
+            issue.endDate.d
+          )
+        );
+        const currentDate = new Date(formattedDate);
+        if (startDate.getTime() === currentDate.getTime()) {
+          // Found a timeline block for this issue
+          timelineBlock = true;
+          dateDiff += issue.endDate.d - issue.startDate.d;
+        }
+      }
+      // && new Date(
+      //   createFormattedDateFromStr(
+      //     issue.startDate.y,
+      //     issue.startDate.m,
+      //     issue.startDate.d
+      //   )
+      // ) <=
+      //   formattedDate >=
+      //   new Date(
+      //     createFormattedDateFromStr(
+      //       issue.endDate.y,
+      //       issue.endDate.m,
+      //       issue.endDate.d
+      //     )
+      //   );
       taskRow.push(
         <div
           key={`${issue.id}-${j}`}
@@ -172,6 +174,40 @@ const TimeDuration = ({ issue, timeRange }) => {
           data-date={formattedDate}
           // onDrop={onTaskDurationDrop}
         >
+          {/* Create task on timeline */}
+          {timelineBlock ? (
+            <div
+              key={`${i}-${issue?.id}`}
+              draggable="true"
+              tabIndex="0"
+              // onDragStart={() => handleDragStart(issue?.id)}
+              style={{
+                ...styles.taskDuration,
+                width: `calc(${dateDiff} * 100% - 1px)`,
+                // opacity: taskDurationissueDraggedId === issue?.id ? '0.5' : '1',
+                color: 'white',
+                background: 'blue',
+                fontSize: '0.75rem',
+                display: 'flex',
+                alignItems: 'top',
+                // justifyContent: 'center',
+                overflow: 'hidden',
+                position: 'relative',
+                zIndex: '1',
+                textOverflow: 'ellipsis',
+                // whiteSpace: 'nowrap',
+                alignItems: 'center',
+                height: '40px', // TODO: Should we make this a variable so one change for all?
+              }}
+              onDoubleClick={(e) => console.log('Double Clicked', e)}
+              // onClick={(e) => viewTask(e, el?.id)}
+              // onKeyDown={(e) => deleteTaskDuration(e, el?.id)}
+            >
+              {issue?.name}
+            </div>
+          ) : (
+            false
+          )}
           {/* {issueDurations.map((el, i) => {
             if (el?.task === task?.id && el?.start === formattedDate) {
               return (
@@ -207,7 +243,7 @@ const TimeDuration = ({ issue, timeRange }) => {
     taskRows.push(
       <>
         <div
-          key={i + '-' + issue.id}
+          key={'table-rows' + i + '-' + issue.id}
           className={`task_row_content task_row_content-${issue.id}`}
           style={customStyles.ganttTimePeriod}
         >
@@ -272,7 +308,7 @@ const TimeDuration = ({ issue, timeRange }) => {
     );
     monthRows.push(taskRows);
     taskRow = [];
-    mnth.setMonth(mnth.getMonth() + 1);
+    date_startMonth.setMonth(date_startMonth.getMonth() + 1);
   }
   return monthRows;
 };
