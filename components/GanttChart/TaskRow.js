@@ -177,7 +177,7 @@ const TimeDuration = ({ issue, timeRange }) => {
           {/* Create task on timeline */}
           {timelineBlock ? (
             <div
-              key={`${i}-${issue?.id}`}
+              key={`time-druration-${issue.id}-${Math.random()}`}
               draggable="true"
               tabIndex="0"
               // onDragStart={() => handleDragStart(issue?.id)}
@@ -239,11 +239,9 @@ const TimeDuration = ({ issue, timeRange }) => {
         </div>
       );
     }
-
     taskRows.push(
-      <>
+      <div key={`table-rows-${i}-${issue.id}`}>
         <div
-          key={'table-rows' + i + '-' + issue.id}
           className={`task_row_content task_row_content-${issue.id}`}
           style={customStyles.ganttTimePeriod}
         >
@@ -304,7 +302,7 @@ const TimeDuration = ({ issue, timeRange }) => {
             </div>
           );
         })} */}
-      </>
+      </div>
     );
     monthRows.push(taskRows);
     taskRow = [];
