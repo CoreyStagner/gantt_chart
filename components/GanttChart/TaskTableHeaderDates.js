@@ -95,12 +95,6 @@ const customStyles = {
 
 export default function TaskTableHeader({ timeRange }) {
   const [sprintDateRanges, setSprintDateRanges] = useState([]);
-  // const [timeRange, setTimeRange] = useState({
-  //   fromSelectMonth: new Date().getMonth() - 1,
-  //   fromSelectYear: new Date().getFullYear(),
-  //   toSelectMonth: new Date().getMonth() + 1,
-  //   toSelectYear: new Date().getFullYear(),
-  // });
 
   const currentDate = getDateTimeObject();
   if (!currentDate) {
@@ -192,11 +186,11 @@ export default function TaskTableHeader({ timeRange }) {
           data-day={j}
           style={{
             ...customStyles.ganttTimePeriod,
-            outline: '1px solid var(--color-transparent-33)', // TODO: Create constant for this color
+            outline: '1px solid var(--color-transparent-33)',
             backgroundColor:
               j === currentDate.day &&
               startMonth.getMonth() + 1 + i === currentDate.month
-                ? 'var(--color-red-transparent-33)' // TODO: Create constant for this color
+                ? 'var(--color-red-transparent-33)'
                 : determineSprint(
                     month.getFullYear(),
                     startMonth.getMonth(),
@@ -204,9 +198,9 @@ export default function TaskTableHeader({ timeRange }) {
                   ) %
                     2 ===
                   0
-                ? 'var(--color-gray-500)' // TODO: Create constant for this color
-                : 'var(--color-gray-400)', // TODO: Create constant for this color
-            color: 'var(--color-black)', // TODO: Create constant for this color
+                ? 'var(--color-gray-500)'
+                : 'var(--color-gray-400)',
+            color: 'var(--color-black)',
           }}
         >
           <span style={customStyles.ganttTimePeriodSpan}>{j}</span>
@@ -220,14 +214,14 @@ export default function TaskTableHeader({ timeRange }) {
           data-month={startMonth.getMonth() + 1}
           style={{
             ...customStyles.ganttTimePeriod,
-            outline: '1px solid var(--color-transparent-33)', // TODO: Create constant for this color
+            outline: '1px solid var(--color-transparent-33)',
             fontSize: '0.5rem',
           }}
         >
           <span
             style={{
               ...customStyles.ganttTimePeriodSpan,
-              color: 'var(--color-gray-600)', // TODO: Create constant for this color
+              color: 'var(--color-gray-600)',
             }}
           >
             {getDayOfWeek(currYear, currMonth - 1, j - 1)}
@@ -267,9 +261,6 @@ export default function TaskTableHeader({ timeRange }) {
     <>
       <style jsx>{styles}</style>
       <div className="gantt_task_row">
-        <div className="task_header-details">
-          <span className="taskName">Task Details</span>
-        </div>
         <div
           className="task_header-time"
           style={{ gridTemplateColumns: `repeat(${numMonths}, 1fr)` }}

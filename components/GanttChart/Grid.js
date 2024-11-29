@@ -4,7 +4,7 @@ export default function Grid({ children }) {
       {children}
       <style jsx>{`
         #gantt-grid-container {
-          // display: grid;
+          display: flex;
           // grid-template-columns: 300px 1fr;
           outline: 2px solid var(--color-outline);
           border-radius: 5px;
