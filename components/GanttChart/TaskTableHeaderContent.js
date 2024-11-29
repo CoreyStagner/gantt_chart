@@ -18,8 +18,7 @@ const styles = `
 
   .task_header-details {
     display: flex;
-    flex-basis: 30%;
-    justify-content: space-between;
+    margin: auto;
   }
 
   .task_header-time {
@@ -91,17 +90,41 @@ const customStyles = {
     boxShadow: '3px 3px 3px rgba(0, 0, 0, 0.05)',
     cursor: 'move',
   },
+  'task_header-details': {
+    display: 'flex',
+    margin: 'auto',
+  },
 };
 
 export default function TaskTableHeader() {
   return (
     <>
       <style jsx>{styles}</style>
-      <div className="gantt_task_row" style={{ height: '120px' }}>
-        <div className="task_header-details">
-          <span className="taskName" style={{ textOverflow: 'ellipsis' }}>
-            Task Details
-          </span>
+      <div
+        className="gantt_task_row"
+        style={{
+          height: '120px',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {/* Show Select component so that the user can change the view */}
+        <div>Filter Select</div>
+        {/* Show Heading and timeline buttons */}
+        <div style={customStyles['task_header-details']}>
+          <div>
+            <span className="taskName">Task Details</span>
+          </div>
+          <div>
+            {/* list of buttons to zoom in, out, and focus the timeline */}
+            <div>+</div>
+            <div>C</div>
+            <div>-</div>
+          </div>
+        </div>
+        <div>
+          Options:
+          {/* List of buttons that can: Sort Alphabetically, in order of start date */}
         </div>
       </div>
     </>
