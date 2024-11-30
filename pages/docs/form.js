@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Input from '../../components/Form/Input';
+import { Button } from '../../components/Button/Button';
 // import styles from '../styles/Home.module.css';
 
 export default function Doc_Form() {
@@ -67,6 +68,247 @@ export default function Doc_Form() {
               placeholder: 'Placeholder Text: Enter Issue Name',
             }}
           />
+        </div>
+
+        <div>
+          <h2>Buttons</h2>
+          <p>Buttons ...</p>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <h3>Primary</h3>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Button
+                size="xsmall"
+                modifier="primary"
+                textContent="Primary (Extra Small)"
+              />
+              <Button
+                size="small"
+                modifier="primary"
+                textContent="Primary (Small)"
+              />
+              <Button
+                size="medium"
+                modifier="primary"
+                textContent="Primary (Medium)"
+              />
+              <Button
+                size="large"
+                modifier="primary"
+                textContent="Primary (Large)"
+              />
+              <Button
+                size="xlarge"
+                modifier="primary"
+                textContent="Primary (Extra Large)"
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <h3>Secondary</h3>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Button
+                size="xsmall"
+                modifier="Secondary"
+                textContent="Secondary (Extra Small)"
+              />
+              <Button
+                size="small"
+                modifier="Secondary"
+                textContent="Secondary (Small)"
+              />
+              <Button
+                size="medium"
+                modifier="Secondary"
+                textContent="Secondary (Medium)"
+              />
+              <Button
+                size="large"
+                modifier="Secondary"
+                textContent="Secondary (Large)"
+              />
+              <Button
+                size="xlarge"
+                modifier="Secondary"
+                textContent="Secondary (Extra Large)"
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <h3>Tertiary</h3>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Button
+                size="xsmall"
+                modifier="Tertiary"
+                textContent="Tertiary (Extra Small)"
+              />
+              <Button
+                size="small"
+                modifier="Tertiary"
+                textContent="Tertiary (Small)"
+              />
+              <Button
+                size="medium"
+                modifier="Tertiary"
+                textContent="Tertiary (Medium)"
+              />
+              <Button
+                size="large"
+                modifier="Tertiary"
+                textContent="Tertiary (Large)"
+              />
+              <Button
+                size="xlarge"
+                modifier="Tertiary"
+                textContent="Tertiary (Extra Large)"
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <h3>Disabled</h3>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <Button
+                size="xsmall"
+                modifier="Disabled"
+                disabled={true}
+                textContent="Disabled (Extra Small)"
+              />
+              <Button
+                size="small"
+                modifier="Disabled"
+                disabled={true}
+                textContent="Disabled (Small)"
+              />
+              <Button
+                size="medium"
+                modifier="Disabled"
+                disabled={true}
+                textContent="Disabled (Medium)"
+              />
+              <Button
+                size="large"
+                modifier="Disabled"
+                disabled={true}
+                textContent="Disabled (Large)"
+              />
+              <Button
+                size="xlarge"
+                modifier="Disabled"
+                disabled={true}
+                textContent="Disabled (Extra Large)"
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <h3>Block</h3>
+            <div
+              style={{
+                width: '100%',
+              }}
+            >
+              <Button
+                size="xsmall"
+                modifier="Primary Block"
+                textContent="Block (Extra Small)"
+              />
+              <Button
+                size="small"
+                modifier="Primary Block"
+                textContent="Block (Small)"
+              />
+              <Button
+                size="medium"
+                modifier="Primary Block"
+                textContent="Block (Medium)"
+              />
+              <Button
+                size="large"
+                modifier="Primary Block"
+                textContent="Block (Large)"
+              />
+              <Button
+                size="xlarge"
+                modifier="Primary Block"
+                textContent="Block (Extra Large)"
+              />
+            </div>
+          </div>
         </div>
       </main>
     </div>

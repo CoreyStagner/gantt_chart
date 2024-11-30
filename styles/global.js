@@ -302,5 +302,10 @@ export default css.global`
     --color-transparent-05: rgba(0, 0, 0, 0.05);
     --color-transparent-33: rgba(0, 0, 0, 0.33);
     --color-red-transparent-33: rgba(255, 0, 0, 0.33);
+
+    --color-bg-button_primary-300: #0195e4;
+    --color-bg-button_secondary-300: #4be35a;
+    --color-bg-button_tertiary-300: #f7f7f7;
+    --color-bg-button_disabled: #e9eaeb;
   }
 `;

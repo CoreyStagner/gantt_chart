@@ -1,44 +1,27 @@
+import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Button = (options) => {
-  const { style, type, data, textContent, modifier, onClick } = options;
-  // Build Style attributes for the button
-  const evalStyle = `
-    button.transparent {
-      background: transparent;
-      border: none;
-    }
-    button.gc-btn {
-      justify-content: center;
-      width: 100%;
-      height: 50px;
-      color: white;
-      background: var(--color-green-300);
-      font-size: 1.1rem;
-      box-shadow: 3px 3px 3px var(--color-transparent-05);
-      border: 0;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      ${
-        style
-          ? Object.entries(style).map((k, v) => {
-              if (!k) return;
-              const [attr, val] = k;
-              return `${attr}: ${val}`;
-            })
-          : null
-      }
-    }
+  const {
+    textContent = 'Add',
+    size = 'medium',
+    modifier = 'primary',
+    type = 'button',
+    disabled = false,
+    onClick = null,
+    hasError = false,
+    errorMessage = null,
+    children = null,
+    customStyle = null,
+  } = options;
 
-    button.gc-btn:hover,
-    button.gc-btn:focus {
-      opacity: 0.85;
-    }
-  `;
+  // Validate and setup the button configuration
+  const [_hasError, _setHasError] = useState(hasError);
+  const [_errorMessage, _setErrorMessage] = useState(errorMessage);
   const allowedButtonTypes = ['button', 'submit', 'reset'];
   const evalTextContent = textContent || 'Add';
   let evalType = type?.toLowerCase() || 'button';
-
+  let evalSize = size?.toLowerCase() || 'medium';
   // Check to validate the button type value
   if (evalType !== 'button') {
     // Check to make sure that the value for type is allowed
@@ -51,25 +34,122 @@ const Button = (options) => {
       evalType = 'button';
     }
   }
+  // Build Style attributes for the button
+  const evalStyle = `
+    button.transparent {
+      background: transparent;
+      border: none;
+    }
+    button.gc-btn {
+      padding: 6px 14px;
+      margin: 10px 0;
+      box-shadow: 3px 3px 3px var(--color-transparent-05);
+      border: 0;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      ${
+        customStyle
+          ? Object.entries(customStyle).map((k, v) => {
+              if (!k) return;
+              const [attr, val] = k;
+              return `${attr}: ${val}`;
+            })
+          : null
+      }
+    }
 
-  if (modifier === 'icon_eye') {
-    return (
+    button.gc-btn:hover,
+    button.gc-btn:focus {
+      opacity: 0.85;
+    }
+
+    button.gc-btn--primary {
+      color: white;
+      background: var(--color-bg-button_primary-300);
+    }
+
+    button.gc-btn--secondary {
+      color: white;
+      background: var(--color-bg-button_secondary-300);
+    }
+
+    button.gc-btn--tertiary {
+      color: black;
+      background: var(--color-bg-button_tertiary-300);
+    }
+
+    button.gc-btn--disabled {
+      color: black;
+      cursor: not-allowed;
+      background: var(--color-bg-button_disabled);
+    }
+
+    button.gc-btn--xsmall {
+      font-size: 8px;
+      line-height: 10px;
+    }
+
+    button.gc-btn--small {
+      font-size: 10px;
+      line-height: 12px;
+    }
+
+    button.gc-btn--medium {
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    button.gc-btn--large {
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    button.gc-btn--xlarge {
+      font-size: 22px;
+      line-height: 24px;
+    }
+
+    button.gc-btn--block {
+      width: 100%;
+    }
+  `;
+
+  // Button Local Functions
+  const handleOnClick = (e) => {
+    if (disabled) {
+      _setHasError(true);
+      _setErrorMessage(
+        'Button is disabled. Please review the page to find any errors.'
+      );
+    } else if (onClick) {
+      onClick(e);
+    } else {
+      console.warn('Button has no onClick event handler.');
+    }
+  };
+
+  // Render component
+  return (
+    <div>
       <button
-        className="transparent"
-        data={JSON.stringify(data)}
-        onClick={onClick}
+        className={`gc-btn gc-btn--${evalSize} ${modifier
+          .split(' ')
+          .map((m) => `gc-btn--${m.toLowerCase()}`)
+          .join(' ')} `}
+        type={evalType}
+        disabled={disabled}
+        onClick={handleOnClick}
       >
-        <VisibilityIcon />
-      </button>
-    );
-  } else {
-    return (
-      <button className="gc-btn" type={evalType}>
         <style>{evalStyle}</style>
         {evalTextContent}
       </button>
-    );
-  }
+      {_hasError && (
+        <div className="gc-btn--error_container">
+          {_errorMessage || 'Something went wrong. Please try again.'}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export { Button };

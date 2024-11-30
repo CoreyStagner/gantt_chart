@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '../Button/Button';
 
 import {
   monthDiff,
@@ -117,7 +118,16 @@ export default function TaskTableHeader() {
           </div>
           <div>
             {/* list of buttons to zoom in, out, and focus the timeline */}
-            <div>+</div>
+            <Button
+              size="small"
+              modifier="transparent"
+              textContent={
+                <>
+                  <span className="sr-exclude">+</span>
+                  <span className="sr-only">Zoom In</span>
+                </>
+              }
+            />
             <div>C</div>
             <div>-</div>
           </div>
