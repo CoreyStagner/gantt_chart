@@ -65,23 +65,24 @@ const Button = (options) => {
 
     button.gc-btn--primary {
       color: white;
-      background: var(--color-bg-button_primary-300);
+      background: var(--button-primary--bg_color);
     }
 
     button.gc-btn--secondary {
       color: white;
-      background: var(--color-bg-button_secondary-300);
+      background: var(--button-secondary--bg_color);
     }
 
     button.gc-btn--tertiary {
       color: black;
-      background: var(--color-bg-button_tertiary-300);
+      background: var(--button-tertiary--bg_color);
+      border: 1px solid var(--button-tertiary--border_color);
     }
 
     button.gc-btn--disabled {
       color: black;
       cursor: not-allowed;
-      background: var(--color-bg-button_disabled);
+      background: var(--button-disabled--bg_color);
     }
 
     button.gc-btn--xsmall {
