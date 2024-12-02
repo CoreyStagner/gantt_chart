@@ -15,10 +15,10 @@ export default function Doc_Form() {
         { variable: '--color-red-700', value: '#d32f2f' },
         { variable: '--color-red-800', value: '#c62828' },
         { variable: '--color-red-900', value: '#b71c1c' },
-        { variable: '--color-red-A100', value: '#ff8a80' },
-        { variable: '--color-red-A200', value: '#ff5252' },
-        { variable: '--color-red-A400', value: '#ff1744' },
-        { variable: '--color-red-A700', value: '#d50000' },
+        // { variable: '--color-red-A100', value: '#ff8a80' },
+        // { variable: '--color-red-A200', value: '#ff5252' },
+        // { variable: '--color-red-A400', value: '#ff1744' },
+        // { variable: '--color-red-A700', value: '#d50000' },
       ],
     },
     {
@@ -34,10 +34,10 @@ export default function Doc_Form() {
         { variable: '--color-blue-700', value: '#c2185b' },
         { variable: '--color-blue-800', value: '#ad1457' },
         { variable: '--color-blue-900', value: '#880e4f' },
-        { variable: '--color-blue-A100', value: '#ff80ab' },
-        { variable: '--color-blue-A200', value: '#ff4081' },
-        { variable: '--color-blue-A400', value: '#f50057' },
-        { variable: '--color-blue-A700', value: '#c51162' },
+        // { variable: '--color-blue-A100', value: '#ff80ab' },
+        // { variable: '--color-blue-A200', value: '#ff4081' },
+        // { variable: '--color-blue-A400', value: '#f50057' },
+        // { variable: '--color-blue-A700', value: '#c51162' },
       ],
     },
     {
@@ -53,10 +53,10 @@ export default function Doc_Form() {
         { variable: '--color-purple-700', value: '#7b1fa2' },
         { variable: '--color-purple-800', value: '#6a1b9a' },
         { variable: '--color-purple-900', value: '#4a148c' },
-        { variable: '--color-purple-A100', value: '#ea80fc' },
-        { variable: '--color-purple-A200', value: '#e040fb' },
-        { variable: '--color-purple-A400', value: '#d500f9' },
-        { variable: '--color-purple-A700', value: '#aa00ff' },
+        // { variable: '--color-purple-A100', value: '#ea80fc' },
+        // { variable: '--color-purple-A200', value: '#e040fb' },
+        // { variable: '--color-purple-A400', value: '#d500f9' },
+        // { variable: '--color-purple-A700', value: '#aa00ff' },
       ],
     },
     {
@@ -72,10 +72,10 @@ export default function Doc_Form() {
         { variable: '--color-deeppurple-700', value: '#512da8' },
         { variable: '--color-deeppurple-800', value: '#4527a0' },
         { variable: '--color-deeppurple-900', value: '#311b92' },
-        { variable: '--color-deeppurple-A100', value: '#b388ff' },
-        { variable: '--color-deeppurple-A200', value: '#7c4dff' },
-        { variable: '--color-deeppurple-A400', value: '#651fff' },
-        { variable: '--color-deeppurple-A700', value: '#6200ea' },
+        // { variable: '--color-deeppurple-A100', value: '#b388ff' },
+        // { variable: '--color-deeppurple-A200', value: '#7c4dff' },
+        // { variable: '--color-deeppurple-A400', value: '#651fff' },
+        // { variable: '--color-deeppurple-A700', value: '#6200ea' },
       ],
     },
     {
@@ -91,10 +91,10 @@ export default function Doc_Form() {
         { variable: '--color-indigo-700', value: '#303f9f' },
         { variable: '--color-indigo-800', value: '#283593' },
         { variable: '--color-indigo-900', value: '#1a237e' },
-        { variable: '--color-indigo-A100', value: '#8c9eff' },
-        { variable: '--color-indigo-A200', value: '#536dfe' },
-        { variable: '--color-indigo-A400', value: '#3d5afe' },
-        { variable: '--color-indigo-A700', value: '#304ffe' },
+        // { variable: '--color-indigo-A100', value: '#8c9eff' },
+        // { variable: '--color-indigo-A200', value: '#536dfe' },
+        // { variable: '--color-indigo-A400', value: '#3d5afe' },
+        // { variable: '--color-indigo-A700', value: '#304ffe' },
       ],
     },
     {
@@ -110,10 +110,10 @@ export default function Doc_Form() {
         { variable: '--color-pink-700', value: '#1976d2' },
         { variable: '--color-pink-800', value: '#1565c0' },
         { variable: '--color-pink-900', value: '#0d47a1' },
-        { variable: '--color-pink-A100', value: '#82b1ff' },
-        { variable: '--color-pink-A200', value: '#448aff' },
-        { variable: '--color-pink-A400', value: '#2979ff' },
-        { variable: '--color-pink-A700', value: '#2962ff' },
+        // { variable: '--color-pink-A100', value: '#82b1ff' },
+        // { variable: '--color-pink-A200', value: '#448aff' },
+        // { variable: '--color-pink-A400', value: '#2979ff' },
+        // { variable: '--color-pink-A700', value: '#2962ff' },
       ],
     },
     {
@@ -129,10 +129,10 @@ export default function Doc_Form() {
         { variable: '--color-lightblue-700', value: '#0288d1' },
         { variable: '--color-lightblue-800', value: '#0277bd' },
         { variable: '--color-lightblue-900', value: '#01579b' },
-        { variable: '--color-lightblue-A100', value: '#80d8ff' },
-        { variable: '--color-lightblue-A200', value: '#40c4ff' },
-        { variable: '--color-lightblue-A400', value: '#00b0ff' },
-        { variable: '--color-lightblue-A700', value: '#0091ea' },
+        // { variable: '--color-lightblue-A100', value: '#80d8ff' },
+        // { variable: '--color-lightblue-A200', value: '#40c4ff' },
+        // { variable: '--color-lightblue-A400', value: '#00b0ff' },
+        // { variable: '--color-lightblue-A700', value: '#0091ea' },
       ],
     },
     {
@@ -148,10 +148,10 @@ export default function Doc_Form() {
         { variable: '--color-cyan-700', value: '#0097a7' },
         { variable: '--color-cyan-800', value: '#00838f' },
         { variable: '--color-cyan-900', value: '#006064' },
-        { variable: '--color-cyan-A100', value: '#84ffff' },
-        { variable: '--color-cyan-A200', value: '#18ffff' },
-        { variable: '--color-cyan-A400', value: '#00e5ff' },
-        { variable: '--color-cyan-A700', value: '#00b8d4' },
+        // { variable: '--color-cyan-A100', value: '#84ffff' },
+        // { variable: '--color-cyan-A200', value: '#18ffff' },
+        // { variable: '--color-cyan-A400', value: '#00e5ff' },
+        // { variable: '--color-cyan-A700', value: '#00b8d4' },
       ],
     },
     {
@@ -167,10 +167,10 @@ export default function Doc_Form() {
         { variable: '--color-teal-700', value: '#00796b' },
         { variable: '--color-teal-800', value: '#00695c' },
         { variable: '--color-teal-900', value: '#004d40' },
-        { variable: '--color-teal-A100', value: '#a7ffeb' },
-        { variable: '--color-teal-A200', value: '#64ffda' },
-        { variable: '--color-teal-A400', value: '#1de9b6' },
-        { variable: '--color-teal-A700', value: '#00bfa5' },
+        // { variable: '--color-teal-A100', value: '#a7ffeb' },
+        // { variable: '--color-teal-A200', value: '#64ffda' },
+        // { variable: '--color-teal-A400', value: '#1de9b6' },
+        // { variable: '--color-teal-A700', value: '#00bfa5' },
       ],
     },
     {
@@ -186,10 +186,10 @@ export default function Doc_Form() {
         { variable: '--color-green-700', value: '#388e3c' },
         { variable: '--color-green-800', value: '#2e7d32' },
         { variable: '--color-green-900', value: '#1b5e20' },
-        { variable: '--color-green-A100', value: '#b9f6ca' },
-        { variable: '--color-green-A200', value: '#69f0ae' },
-        { variable: '--color-green-A400', value: '#00e676' },
-        { variable: '--color-green-A700', value: '#00c853' },
+        // { variable: '--color-green-A100', value: '#b9f6ca' },
+        // { variable: '--color-green-A200', value: '#69f0ae' },
+        // { variable: '--color-green-A400', value: '#00e676' },
+        // { variable: '--color-green-A700', value: '#00c853' },
       ],
     },
     {
@@ -205,10 +205,10 @@ export default function Doc_Form() {
         { variable: '--color-lightgreen-700', value: '#689f38' },
         { variable: '--color-lightgreen-800', value: '#558b2f' },
         { variable: '--color-lightgreen-900', value: '#33691e' },
-        { variable: '--color-lightgreen-A100', value: '#ccff90' },
-        { variable: '--color-lightgreen-A200', value: '#b2ff59' },
-        { variable: '--color-lightgreen-A400', value: '#76ff03' },
-        { variable: '--color-lightgreen-A700', value: '#64dd17' },
+        // { variable: '--color-lightgreen-A100', value: '#ccff90' },
+        // { variable: '--color-lightgreen-A200', value: '#b2ff59' },
+        // { variable: '--color-lightgreen-A400', value: '#76ff03' },
+        // { variable: '--color-lightgreen-A700', value: '#64dd17' },
       ],
     },
     {
@@ -224,10 +224,10 @@ export default function Doc_Form() {
         { variable: '--color-lime-700', value: '#afb42b' },
         { variable: '--color-lime-800', value: '#9e9d24' },
         { variable: '--color-lime-900', value: '#827717' },
-        { variable: '--color-lime-A100', value: '#f4ff81' },
-        { variable: '--color-lime-A200', value: '#eeff41' },
-        { variable: '--color-lime-A400', value: '#c6ff00' },
-        { variable: '--color-lime-A700', value: '#aeea00' },
+        // { variable: '--color-lime-A100', value: '#f4ff81' },
+        // { variable: '--color-lime-A200', value: '#eeff41' },
+        // { variable: '--color-lime-A400', value: '#c6ff00' },
+        // { variable: '--color-lime-A700', value: '#aeea00' },
       ],
     },
     {
@@ -243,10 +243,10 @@ export default function Doc_Form() {
         { variable: '--color-yellow-700', value: '#fbc02d' },
         { variable: '--color-yellow-800', value: '#f9a825' },
         { variable: '--color-yellow-900', value: '#f57f17' },
-        { variable: '--color-yellow-A100', value: '#ffff8d' },
-        { variable: '--color-yellow-A200', value: '#ffff00' },
-        { variable: '--color-yellow-A400', value: '#ffea00' },
-        { variable: '--color-yellow-A700', value: '#ffd600' },
+        // { variable: '--color-yellow-A100', value: '#ffff8d' },
+        // { variable: '--color-yellow-A200', value: '#ffff00' },
+        // { variable: '--color-yellow-A400', value: '#ffea00' },
+        // { variable: '--color-yellow-A700', value: '#ffd600' },
       ],
     },
     {
@@ -262,10 +262,10 @@ export default function Doc_Form() {
         { variable: '--color-amber-700', value: '#ffa000' },
         { variable: '--color-amber-800', value: '#ff8f00' },
         { variable: '--color-amber-900', value: '#ff6f00' },
-        { variable: '--color-amber-A100', value: '#ffe57f' },
-        { variable: '--color-amber-A200', value: '#ffd740' },
-        { variable: '--color-amber-A400', value: '#ffc400' },
-        { variable: '--color-amber-A700', value: '#ffab00' },
+        // { variable: '--color-amber-A100', value: '#ffe57f' },
+        // { variable: '--color-amber-A200', value: '#ffd740' },
+        // { variable: '--color-amber-A400', value: '#ffc400' },
+        // { variable: '--color-amber-A700', value: '#ffab00' },
       ],
     },
     {
@@ -281,10 +281,10 @@ export default function Doc_Form() {
         { variable: '--color-orange-700', value: '#f57c00' },
         { variable: '--color-orange-800', value: '#ef6c00' },
         { variable: '--color-orange-900', value: '#e65100' },
-        { variable: '--color-orange-A100', value: '#ffd180' },
-        { variable: '--color-orange-A200', value: '#ffab40' },
-        { variable: '--color-orange-A400', value: '#ff9100' },
-        { variable: '--color-orange-A700', value: '#ff6d00' },
+        // { variable: '--color-orange-A100', value: '#ffd180' },
+        // { variable: '--color-orange-A200', value: '#ffab40' },
+        // { variable: '--color-orange-A400', value: '#ff9100' },
+        // { variable: '--color-orange-A700', value: '#ff6d00' },
       ],
     },
     {
@@ -300,10 +300,10 @@ export default function Doc_Form() {
         { variable: '--color-deeporange-700', value: '#e64a19' },
         { variable: '--color-deeporange-800', value: '#d84315' },
         { variable: '--color-deeporange-900', value: '#bf360c' },
-        { variable: '--color-deeporange-A100', value: '#ff9e80' },
-        { variable: '--color-deeporange-A200', value: '#ff6e40' },
-        { variable: '--color-deeporange-A400', value: '#ff3d00' },
-        { variable: '--color-deeporange-A700', value: '#dd2c00' },
+        // { variable: '--color-deeporange-A100', value: '#ff9e80' },
+        // { variable: '--color-deeporange-A200', value: '#ff6e40' },
+        // { variable: '--color-deeporange-A400', value: '#ff3d00' },
+        // { variable: '--color-deeporange-A700', value: '#dd2c00' },
       ],
     },
     {
@@ -351,26 +351,23 @@ export default function Doc_Form() {
         { variable: '--color-bluegray-900', value: '#263238' },
       ],
     },
-    {
-      header: 'Black and White',
-      values: [
-        { variable: '--color-black', value: '#000000' },
-        { variable: '--color-white', value: '#ffffff' },
-      ],
-    },
-    {
-      header: 'Transparent',
-      values: [
-        { variable: '--color-transparent', value: 'rgba(0, 0, 0, 0)' },
-        { variable: '--color-transparent-05', value: 'rgba(0, 0, 0, 0.05)' },
-        { variable: '--color-transparent-33', value: 'rgba(0, 0, 0, 0.3)' },
-        {
-          variable: '--color-red-transparent-3',
-          value: 'rgba(255, 0, 0, 0.3)',
-        },
-      ],
-    },
+    // {
+    //   header: 'Black, White, and Transparent',
+    //   values: [
+    //     { variable: '--color-black', value: '#000000' },
+    //     { variable: '--color-white', value: '#ffffff' },
+    //     { variable: '--color-transparent', value: 'rgba(0, 0, 0, 0)' },
+    //     { variable: '--color-transparent-05', value: 'rgba(0, 0, 0, 0.05)' },
+    //     { variable: '--color-transparent-33', value: 'rgba(0, 0, 0, 0.3)' },
+    //     {
+    //       variable: '--color-red-transparent-3',
+    //       value: 'rgba(255, 0, 0, 0.3)',
+    //     },
+    //   ],
+    // },
   ];
+  const colorCount = colorMatrix.length;
+  const colorSwatchSize = 100 / (colorCount + 1);
 
   /**
    * This function will allow the user to quickly copy the color variable to the clipboard
@@ -408,7 +405,7 @@ export default function Doc_Form() {
           >
             {colorMatrix.map((colorGroup) => (
               <div key={colorGroup.header}>
-                <h4
+                {/* <h4
                   style={{
                     display: 'flex',
                     flexWrap: 'wrap',
@@ -418,7 +415,7 @@ export default function Doc_Form() {
                   }}
                 >
                   {colorGroup.header}
-                </h4>
+                </h4> */}
                 {colorGroup.values.map((color) => (
                   <div
                     key={color.variable}
@@ -427,11 +424,32 @@ export default function Doc_Form() {
                     style={{
                       display: 'flex',
                       flexShrink: 1,
-                      height: '100px',
-                      width: '100px',
+                      height: `${colorSwatchSize}vw`,
+                      width: `${colorSwatchSize}vw`,
                       backgroundColor: color.value,
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
                     }}
-                  ></div>
+                  >
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        textDecoration: 'underline',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {color.variable.split('--color-')[1]}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {color.value.toUpperCase()}
+                    </span>
+                  </div>
                 ))}
               </div>
             ))}

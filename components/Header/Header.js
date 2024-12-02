@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const customStyles = {
   container: {
@@ -12,10 +12,25 @@ const customStyles = {
 };
 
 const Header = (props) => {
+  const [_headerText, _setHeaderText] = useState('Gantt Tracker');
+  const [isDocPage, setIsDocPage] = useState(false);
+
+  useEffect(() => {
+    if (props.header) _setHeaderText(props.header);
+    setIsDocPage(window.location.pathname.includes('/docs') ? true : false);
+  }, [props]);
+
   return (
     <header style={customStyles.container}>
-      if (props.logo){' '}
-      {<img src="logo.png" alt="Company Logo" className="logo" />}
+      {props.logo && <img src="logo.png" alt="Company Logo" className="logo" />}
+      <div>
+        {props.header
+          ? props.header
+          : isDocPage
+          ? 'Documentation'
+          : 'Gantt Tracker'}
+      </div>
+      {isDocPage ? 'Doc' : 'Gantt'}
       <nav>
         <ul>
           <li>
