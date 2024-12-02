@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { Header } from '../components/Header/Header';
 
 class MyDocument extends Document {
   render() {
@@ -10,6 +11,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
+        <Header />
         <body>
           <Main />
           <NextScript />
