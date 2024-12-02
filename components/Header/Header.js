@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const customStyles = {
   container: {
@@ -22,7 +24,15 @@ const Header = (props) => {
 
   return (
     <header style={customStyles.container}>
-      {props.logo && <img src="logo.png" alt="Company Logo" className="logo" />}
+      {props.logo && (
+        <Image
+          src={props.logo?.src}
+          alt={props.logo?.alt}
+          height={100}
+          width={100}
+          className={props.logo?.className}
+        />
+      )}
       <div>
         {props.header
           ? props.header
@@ -34,13 +44,13 @@ const Header = (props) => {
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/docs/colors">Colors</a>
+            <Link href="/docs/colors">Colors</Link>
           </li>
           <li>
-            <a href="/docs/form">Form</a>
+            <Link href="/docs/form">Form</Link>
           </li>
         </ul>
       </nav>
