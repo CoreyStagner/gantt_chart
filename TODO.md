@@ -42,3 +42,11 @@
           custom_field_1: String,         // If we do this will need to figure some way to connect the type or value with what they are intending
         }
       ```
+
+```
+Field Map
+{
+  field#: string from client data structure,
+  ...
+}
+```

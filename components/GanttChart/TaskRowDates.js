@@ -14,20 +14,11 @@ const styles = `
     align-items: flex-start;
   }
 
-  .gantt_task_row-header {
-    display: flex;
-    flex-basis: 30%;
-    justify-content: space-between;
-  }
-
   .gantt_task_row-time {
     display: flex;
     flex: 1 0 70%;
   }
 
-  .taskName {
-    width: 100%;
-  }
 `;
 
 // TODO: Update the styles
@@ -113,7 +104,7 @@ const TimeDuration = ({ issue, timeRange }) => {
           createFormattedDateFromStr(
             issue.startDate.y,
             issue.startDate.m,
-            issue.startDate.d - 1
+            issue.startDate.d
           )
         );
         const endDate = new Date(
@@ -132,6 +123,7 @@ const TimeDuration = ({ issue, timeRange }) => {
       }
       taskRow.push(
         <div
+          data-comp="TimeDuration"
           key={`${issue.id}-${j}`}
           style={{
             ...customStyles.ganttTimePeriodCell,
@@ -151,7 +143,7 @@ const TimeDuration = ({ issue, timeRange }) => {
           {/* Create task on timeline */}
           {timelineBlock ? (
             <div
-              key={`time-druration-${issue.id}-${Math.random()}`}
+              key={`time-duration-${issue.id}-${Math.random()}`}
               draggable="true"
               tabIndex="0"
               style={{
@@ -212,6 +204,7 @@ export default function TaskRow({ issue, timeRange }) {
       key={`${issue?.id}-${issue.name}`}
       id={`task_row_header task_row_header-${issue?.id}`}
       className="gantt_task_row"
+      data-comp="TaskRow"
     >
       <style jsx>{styles}</style>
       <div

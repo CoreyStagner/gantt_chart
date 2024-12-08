@@ -27,9 +27,6 @@ const styles = `
     width: 70%;
   }
 
-  .taskName {
-    width: 100%;
-  }
 
 
 

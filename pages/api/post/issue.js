@@ -1,5 +1,9 @@
 import { connectToDatabase } from '../../../lib/mongodb';
 
+const seeds = './../seeds/sample.json';
+
+console.log('seeds', seeds);
+
 export default async function handler(request, response) {
   const { database } = await connectToDatabase();
   let errors = [];

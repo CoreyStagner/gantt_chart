@@ -1,4 +1,5 @@
 import { Button } from './../Button/Button';
+import { LuScanEye } from 'react-icons/lu';
 
 // TODO: Update the styles, and convert to the custom styles
 const styles = `
@@ -11,7 +12,7 @@ const styles = `
   .gantt_task_row-header {
     display: flex;
     flex-basis: 30%;
-    justify-content: space-between;
+    gap: 10px;
   }
 
   .gantt_task_row-time {
@@ -20,7 +21,9 @@ const styles = `
   }
 
   .taskName {
-    width: 100%;
+    width: 95%;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -57,16 +60,21 @@ const customStyles = {
   header: {
     display: 'flex',
     flexBasis: '30%',
-    justifyContent: 'space-between',
+    gap: '10px',
   },
 };
 
 export default function TaskRow({ issue }) {
   return (
     <div
+      data-comp="TaskRow"
       key={`${issue?.id}-${issue.name}`}
       id={`task_row_header task_row_header-${issue?.id}`}
       className="gantt_task_row"
+      style={{
+        padding: '0 10px',
+        borderTop: '1px solid var(--color-outline)',
+      }}
     >
       <style jsx>{styles}</style>
       <div
@@ -75,22 +83,27 @@ export default function TaskRow({ issue }) {
           ...customStyles.header,
           flexBasis: '30%',
           flex: '1 0 30%',
-          height: '40px',
-          marginTop: '0.5px',
+          height: '39px',
+          marginTop: '0.25px',
         }}
       >
         <Button
-          modifier="icon_eye"
+          modifier="ghost"
+          size="icon"
           className="focusTask"
           type="button"
+          textContent={<LuScanEye />}
+          ariaLabel={`Focus on task: ${issue?.name}`}
           data={{
             id: issue.id,
           }}
         ></Button>
-        <span className="taskName">{issue?.name}</span>
-        <button className="deleteTask" type="button" data-task-id={issue?.id}>
-          x
-        </button>
+        <div
+          className="taskName"
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          {issue?.name}
+        </div>
       </div>
     </div>
   );

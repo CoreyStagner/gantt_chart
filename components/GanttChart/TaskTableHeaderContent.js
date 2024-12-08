@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../Button/Button';
+import { CiCirclePlus, CiCircleMinus } from 'react-icons/ci';
+import { BiHorizontalCenter } from 'react-icons/bi';
 
 import {
   monthDiff,
@@ -25,10 +27,6 @@ const styles = `
   .task_header-time {
     display: grid;
     width: 70%;
-  }
-
-  .taskName {
-    width: 100%;
   }
 
 
@@ -102,39 +100,61 @@ export default function TaskTableHeader() {
     <>
       <style jsx>{styles}</style>
       <div
+        data-comp="TaskTableHeader"
         className="gantt_task_row"
         style={{
           height: '120px',
           display: 'flex',
-          flexDirection: 'column',
         }}
       >
         {/* Show Select component so that the user can change the view */}
         <div>Filter Select</div>
         {/* Show Heading and timeline buttons */}
         <div style={customStyles['task_header-details']}>
-          <div>
-            <span className="taskName">Task Details</span>
-          </div>
-          <div>
+          {/* Sprint zoom controls */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             {/* list of buttons to zoom in, out, and focus the timeline */}
             <Button
-              size="small"
-              modifier="transparent"
+              size="large"
+              modifier="ghost"
               textContent={
                 <>
-                  <span className="sr-exclude">+</span>
-                  <span className="sr-only">Zoom In</span>
+                  <span>
+                    <CiCirclePlus />
+                  </span>
                 </>
               }
             />
-            <div>C</div>
-            <div>-</div>
+            <Button
+              size="large"
+              modifier="ghost"
+              textContent={
+                <>
+                  <span>
+                    <BiHorizontalCenter />
+                  </span>
+                </>
+              }
+            />
+            <Button
+              size="large"
+              modifier="ghost"
+              textContent={
+                <>
+                  <span>
+                    <CiCircleMinus />
+                  </span>
+                </>
+              }
+            />
           </div>
-        </div>
-        <div>
-          Options:
-          {/* List of buttons that can: Sort Alphabetically, in order of start date */}
         </div>
       </div>
     </>

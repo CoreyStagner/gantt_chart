@@ -24,6 +24,12 @@ export function getDayOfWeek(year, month, day) {
 }
 
 export function createFormattedDateFromStr(year, month, day) {
+  if (!year || !month || !day) {
+    // console.log(
+    //   '[ERR] createFormattedDateFromStr: Date not formatted correctly.'
+    // );
+    return 'DATE_ERROR';
+  }
   let monthStr = month.toString();
   let dayStr = day.toString();
 

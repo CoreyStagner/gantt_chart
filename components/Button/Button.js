@@ -3,6 +3,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Button = (options) => {
   const {
+    ariaLabel = null,
     textContent = 'Add',
     size = 'medium',
     modifier = 'primary',
@@ -11,7 +12,6 @@ const Button = (options) => {
     onClick = null,
     hasError = false,
     errorMessage = null,
-    children = null,
     customStyle = null,
   } = options;
 
@@ -79,6 +79,20 @@ const Button = (options) => {
       border: 1px solid var(--button-tertiary--border_color);
     }
 
+    button.gc-btn--ghost {
+      color: black;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    button.gc-btn--rounded {
+      border-radius: 50%;
+    }
+
+    button.gc-btn--icon {
+      padding: 0;
+    }
+
     button.gc-btn--disabled {
       color: black;
       cursor: not-allowed;
@@ -140,6 +154,7 @@ const Button = (options) => {
         type={evalType}
         disabled={disabled}
         onClick={handleOnClick}
+        aria-label={ariaLabel}
       >
         <style>{evalStyle}</style>
         {evalTextContent}
