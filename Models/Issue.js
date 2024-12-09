@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Issue = mongoose.Schema(
+const IssueSchema = new mongoose.Schema(
   {
     name: String,
     age: Number,
@@ -21,4 +21,4 @@ const Issue = mongoose.Schema(
   }
 );
 
-export default mongoose.models.Issue || mongoose.model('Issue', Issue);
+module.exports = mongoose.model('Issue', IssueSchema);

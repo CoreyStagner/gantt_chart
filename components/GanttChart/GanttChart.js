@@ -25,6 +25,25 @@ export default function GanttChart() {
       const results = await fetch('/api/get/issue').then((response) =>
         response.json()
       );
+      const projects = [];
+      results.forEach((issue) => {
+        if (issue.issue_type === 'PROJ') {
+          projects.push(issue);
+        }
+      });
+      projects.forEach((project) => {
+        project.children = [];
+        results.forEach((issue) => {
+          if (
+            issue.issue_type === 'TASK' &&
+            issue.parent.includes(project.id)
+          ) {
+            project.children.push(issue);
+          }
+        });
+      });
+      console.log(projects);
+      debugger;
       setIssues(results);
     })();
   }, []);
