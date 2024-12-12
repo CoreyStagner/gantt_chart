@@ -1,7 +1,7 @@
 [
   {
     "name": "Issue 1",
-    "id:": "TEST-1",
+    "id": "TEST-1",
     "status": 100,
     "endDate": {
       "y": "2024",
@@ -29,7 +29,7 @@
   },
   {
     "name": "Issue 2",
-    "id:": "TEST-2",
+    "id": "TEST-2",
     "status": 100,
     "endDate": {
       "y": "2024",
@@ -57,7 +57,7 @@
   },
   {
     "name": "Issue 3",
-    "id:": "TEST-3",
+    "id": "TEST-3",
     "status": 100,
     "endDate": {
       "y": "2024",
@@ -85,7 +85,7 @@
   },
   {
     "name": "Issue 4",
-    "id:": "TEST-4",
+    "id": "TEST-4",
     "status": 100,
     "endDate": {
       "y": "2024",
@@ -113,7 +113,7 @@
   },
   {
     "name": "Issue 5",
-    "id:": "TEST-5",
+    "id": "TEST-5",
     "status": 100,
     "endDate": {
       "y": "2024",

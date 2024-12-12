@@ -188,7 +188,7 @@ const TimeDuration = ({ issue, timeRange }) => {
   return monthRows;
 };
 
-export default function TaskRow({ issue, timeRange }) {
+export default function TaskRow({ issue, timeRange, parent }) {
   const startMonth = new Date(
     parseInt(timeRange.fromSelectYear),
     timeRange.fromSelectMonth
@@ -200,27 +200,38 @@ export default function TaskRow({ issue, timeRange }) {
   const numMonths = monthDiff(startMonth, endMonth) + 1;
 
   return (
-    <div
-      key={`${issue?.id}-${issue.name}`}
-      id={`task_row_header task_row_header-${issue?.id}`}
-      className="gantt_task_row"
-      data-comp="TaskRow"
-    >
-      <style jsx>{styles}</style>
+    <>
       <div
-        className="gantt_task_row-time_container"
-        style={{ display: 'flex', flexBasis: '70%' }}
+        key={`${issue?.id}-${issue.name}`}
+        id={`task_row_header task_row_header-${issue?.id}`}
+        className={parent ? `gantt_task_row hidden` : 'gantt_task_row'}
+        data-parent={parent?.id}
+        data-comp="TaskRow"
       >
+        <style jsx>{styles}</style>
         <div
-          className="gantt_task_row-time"
-          style={{
-            gridTemplateColumns: `repeat(${numMonths}, 1fr)`,
-            display: 'grid',
-          }}
+          className="gantt_task_row-time_container"
+          style={{ display: 'flex', flexBasis: '70%' }}
         >
-          <TimeDuration issue={issue} timeRange={timeRange} />
+          <div
+            className="gantt_task_row-time"
+            style={{
+              gridTemplateColumns: `repeat(${numMonths}, 1fr)`,
+              display: 'grid',
+            }}
+          >
+            <TimeDuration issue={issue} timeRange={timeRange} />
+          </div>
         </div>
       </div>
-    </div>
+      {issue?.children?.map((childIssue, idx) => (
+        <TaskRow
+          key={idx}
+          issue={childIssue}
+          timeRange={timeRange}
+          parent={issue}
+        />
+      ))}
+    </>
   );
 }

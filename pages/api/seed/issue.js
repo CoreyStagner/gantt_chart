@@ -4,7 +4,7 @@ import { connectToDatabase } from '../../../lib/mongodb';
 const seeds = [
   {
     name: 'Issue 1',
-    'id:': 'TEST-1',
+    id: 'TEST-1',
     status: 100,
     endDate: {
       y: '2024',
@@ -32,7 +32,7 @@ const seeds = [
   },
   {
     name: 'Issue 2',
-    'id:': 'TEST-2',
+    id: 'TEST-2',
     status: 100,
     endDate: {
       y: '2024',
@@ -54,13 +54,13 @@ const seeds = [
     summary: 'This is the second issue',
     description: "This is the second issue's description",
     acceptance_criteria: "This is the second issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 3',
-    'id:': 'TEST-3',
+    id: 'TEST-3',
     status: 100,
     endDate: {
       y: '2024',
@@ -82,13 +82,13 @@ const seeds = [
     summary: 'This is the third issue',
     description: "This is the third issue's description",
     acceptance_criteria: "This is the third issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 4',
-    'id:': 'TEST-4',
+    id: 'TEST-4',
     status: 100,
     endDate: {
       y: '2024',
@@ -110,13 +110,13 @@ const seeds = [
     summary: 'This is the fourth issue',
     description: "This is the fourth issue's description",
     acceptance_criteria: "This is the fourth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 5',
-    'id:': 'TEST-5',
+    id: 'TEST-5',
     status: 100,
     endDate: {
       y: '2024',
@@ -138,13 +138,13 @@ const seeds = [
     summary: 'This is the fifth issue',
     description: "This is the fifth issue's description",
     acceptance_criteria: "This is the fifth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 6',
-    'id:': 'TEST-6',
+    id: 'TEST-6',
     status: 100,
     endDate: {
       y: '2024',
@@ -166,13 +166,13 @@ const seeds = [
     summary: 'This is the sixth issue',
     description: "This is the sixth issue's description",
     acceptance_criteria: "This is the sixth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 7',
-    'id:': 'TEST-7',
+    id: 'TEST-7',
     status: 100,
     endDate: {
       y: '2024',
@@ -194,13 +194,13 @@ const seeds = [
     summary: 'This is the seventh issue',
     description: "This is the seventh issue's description",
     acceptance_criteria: "This is the seventh issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 8',
-    'id:': 'TEST-8',
+    id: 'TEST-8',
     status: 100,
     endDate: {
       y: '2024',
@@ -222,13 +222,13 @@ const seeds = [
     summary: 'This is the eighth issue',
     description: "This is the eighth issue's description",
     acceptance_criteria: "This is the eighth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 9',
-    'id:': 'TEST-9',
+    id: 'TEST-9',
     status: 100,
     endDate: {
       y: '2024',
@@ -250,13 +250,13 @@ const seeds = [
     summary: 'This is the ninth issue',
     description: "This is the ninth issue's description",
     acceptance_criteria: "This is the ninth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 10',
-    'id:': 'TEST-10',
+    id: 'TEST-10',
     status: 100,
     endDate: {
       y: '2024',
@@ -278,13 +278,13 @@ const seeds = [
     summary: 'This is the tenth issue',
     description: "This is the tenth issue's description",
     acceptance_criteria: "This is the tenth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 11',
-    'id:': 'TEST-11',
+    id: 'TEST-11',
     status: 100,
     endDate: {
       y: '2024',
@@ -306,13 +306,13 @@ const seeds = [
     summary: 'This is the eleventh issue',
     description: "This is the eleventh issue's description",
     acceptance_criteria: "This is the eleventh issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 12',
-    'id:': 'TEST-12',
+    id: 'TEST-12',
     status: 100,
     endDate: {
       y: '2024',
@@ -334,13 +334,13 @@ const seeds = [
     summary: 'This is the twelfth issue',
     description: "This is the twelfth issue's description",
     acceptance_criteria: "This is the twelfth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 13',
-    'id:': 'TEST-13',
+    id: 'TEST-13',
     status: 100,
     endDate: {
       y: '2024',
@@ -362,13 +362,13 @@ const seeds = [
     summary: 'This is the thirteenth issue',
     description: "This is the thirteenth issue's description",
     acceptance_criteria: "This is the thirteenth issue's acceptance criteria",
-    ref_to: ['PROF-1'],
+    ref_to: ['PROJ-1'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 14',
-    'id:': 'TEST-14',
+    id: 'TEST-14',
     status: 100,
     endDate: {
       y: '2024',
@@ -390,13 +390,13 @@ const seeds = [
     summary: 'This is the fourteenth issue',
     description: "This is the fourteenth issue's description",
     acceptance_criteria: "This is the fourteenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 15',
-    'id:': 'TEST-15',
+    id: 'TEST-15',
     status: 100,
     endDate: {
       y: '2024',
@@ -418,13 +418,13 @@ const seeds = [
     summary: 'This is the fifteenth issue',
     description: "This is the fifteenth issue's description",
     acceptance_criteria: "This is the fifteenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 16',
-    'id:': 'TEST-16',
+    id: 'TEST-16',
     status: 100,
     endDate: {
       y: '2024',
@@ -446,13 +446,13 @@ const seeds = [
     summary: 'This is the sixteenth issue',
     description: "This is the sixteenth issue's description",
     acceptance_criteria: "This is the sixteenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 17',
-    'id:': 'TEST-17',
+    id: 'TEST-17',
     status: 100,
     endDate: {
       y: '2024',
@@ -474,13 +474,13 @@ const seeds = [
     summary: 'This is the seventeenth issue',
     description: "This is the seventeenth issue's description",
     acceptance_criteria: "This is the seventeenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 18',
-    'id:': 'TEST-18',
+    id: 'TEST-18',
     status: 100,
     endDate: {
       y: '2024',
@@ -502,13 +502,13 @@ const seeds = [
     summary: 'This is the eighteenth issue',
     description: "This is the eighteenth issue's description",
     acceptance_criteria: "This is the eighteenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 19',
-    'id:': 'TEST-19',
+    id: 'TEST-19',
     status: 100,
     endDate: {
       y: '2024',
@@ -530,13 +530,13 @@ const seeds = [
     summary: 'This is the nineteenth issue',
     description: "This is the nineteenth issue's description",
     acceptance_criteria: "This is the nineteenth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 20',
-    'id:': 'TEST-20',
+    id: 'TEST-20',
     status: 100,
     endDate: {
       y: '2024',
@@ -558,13 +558,13 @@ const seeds = [
     summary: 'This is the twentieth issue',
     description: "This is the twentieth issue's description",
     acceptance_criteria: "This is the twentieth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 21',
-    'id:': 'TEST-21',
+    id: 'TEST-21',
     status: 100,
     endDate: {
       y: '2024',
@@ -586,13 +586,13 @@ const seeds = [
     summary: 'This is the twenty-first issue',
     description: "This is the twenty-first issue's description",
     acceptance_criteria: "This is the twenty-first issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 22',
-    'id:': 'TEST-22',
+    id: 'TEST-22',
     status: 100,
     endDate: {
       y: '2024',
@@ -615,13 +615,13 @@ const seeds = [
     description: "This is the twenty-second issue's description",
     acceptance_criteria:
       "This is the twenty-second issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 23',
-    'id:': 'TEST-23',
+    id: 'TEST-23',
     status: 100,
     endDate: {
       y: '2024',
@@ -643,13 +643,13 @@ const seeds = [
     summary: 'This is the twenty-third issue',
     description: "This is the twenty-third issue's description",
     acceptance_criteria: "This is the twenty-third issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 24',
-    'id:': 'TEST-24',
+    id: 'TEST-24',
     status: 100,
     endDate: {
       y: '2024',
@@ -672,13 +672,13 @@ const seeds = [
     description: "This is the twenty-fourth issue's description",
     acceptance_criteria:
       "This is the twenty-fourth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 25',
-    'id:': 'TEST-25',
+    id: 'TEST-25',
     status: 100,
     endDate: {
       y: '2024',
@@ -700,13 +700,13 @@ const seeds = [
     summary: 'This is the twenty-fifth issue',
     description: "This is the twenty-fifth issue's description",
     acceptance_criteria: "This is the twenty-fifth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 26',
-    'id:': 'TEST-26',
+    id: 'TEST-26',
     status: 100,
     endDate: {
       y: '2024',
@@ -728,13 +728,13 @@ const seeds = [
     summary: 'This is the twenty-sixth issue',
     description: "This is the twenty-sixth issue's description",
     acceptance_criteria: "This is the twenty-sixth issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 27',
-    'id:': 'TEST-27',
+    id: 'TEST-27',
     status: 100,
     endDate: {
       y: '2024',
@@ -757,13 +757,13 @@ const seeds = [
     description: "This is the twenty-seventh issue's description",
     acceptance_criteria:
       "This is the twenty-seventh issue's acceptance criteria",
-    ref_to: ['PROF-2'],
+    ref_to: ['PROJ-2'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 28',
-    'id:': 'TEST-28',
+    id: 'TEST-28',
     status: 100,
     endDate: {
       y: '2024',
@@ -786,13 +786,13 @@ const seeds = [
     description: "This is the twenty-eighth issue's description",
     acceptance_criteria:
       "This is the twenty-eighth issue's acceptance criteria",
-    ref_to: ['PROF-3'],
+    ref_to: ['PROJ-3'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 29',
-    'id:': 'TEST-29',
+    id: 'TEST-29',
     status: 100,
     endDate: {
       y: '2024',
@@ -814,13 +814,13 @@ const seeds = [
     summary: 'This is the twenty-ninth issue',
     description: "This is the twenty-ninth issue's description",
     acceptance_criteria: "This is the twenty-ninth issue's acceptance criteria",
-    ref_to: ['PROF-3'],
+    ref_to: ['PROJ-3'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 30',
-    'id:': 'TEST-30',
+    id: 'TEST-30',
     status: 100,
     endDate: {
       y: '2024',
@@ -842,13 +842,13 @@ const seeds = [
     summary: 'This is the thirtieth issue',
     description: "This is the thirtieth issue's description",
     acceptance_criteria: "This is the thirtieth issue's acceptance criteria",
-    ref_to: ['PROF-3'],
+    ref_to: ['PROJ-3'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Issue 31',
-    'id:': 'TEST-31',
+    id: 'TEST-31',
     status: 100,
     endDate: {
       y: '2024',
@@ -870,13 +870,13 @@ const seeds = [
     summary: 'This is the thirty-first issue',
     description: "This is the thirty-first issue's description",
     acceptance_criteria: "This is the thirty-first issue's acceptance criteria",
-    ref_to: ['PROF-3'],
+    ref_to: ['PROJ-3'],
     ref_by: null,
     assigned_iteration: 'ITERATION-1',
   },
   {
     name: 'Project 1',
-    'id:': 'PROJ-1',
+    id: 'PROJ-1',
     status: 100,
     endDate: {
       y: '2024',
@@ -904,7 +904,7 @@ const seeds = [
   },
   {
     name: 'Project 2',
-    'id:': 'PROJ-2',
+    id: 'PROJ-2',
     status: 100,
     endDate: {
       y: '2024',
@@ -932,7 +932,7 @@ const seeds = [
   },
   {
     name: 'Project 3',
-    'id:': 'PROJ-3',
+    id: 'PROJ-3',
     status: 100,
     endDate: {
       y: '2024',

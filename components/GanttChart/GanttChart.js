@@ -34,17 +34,12 @@ export default function GanttChart() {
       projects.forEach((project) => {
         project.children = [];
         results.forEach((issue) => {
-          if (
-            issue.issue_type === 'TASK' &&
-            issue.parent.includes(project.id)
-          ) {
+          if (issue?.ref_to?.includes(project.id)) {
             project.children.push(issue);
           }
         });
       });
-      console.log(projects);
-      debugger;
-      setIssues(results);
+      setIssues(projects);
     })();
   }, []);
 

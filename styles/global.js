@@ -31,6 +31,10 @@ export default css.global`
     align-items: center;
   }
 
+  .hidden {
+    display: none;
+  }
+
   :root {
     --color-text: #272a2e;
     --color-primary-dark: #0195e4;

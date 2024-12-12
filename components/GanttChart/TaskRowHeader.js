@@ -1,5 +1,6 @@
 import { Button } from './../Button/Button';
 import { LuScanEye } from 'react-icons/lu';
+import { TbLayoutNavbarExpandFilled } from 'react-icons/tb';
 
 // TODO: Update the styles, and convert to the custom styles
 const styles = `
@@ -64,47 +65,78 @@ const customStyles = {
   },
 };
 
-export default function TaskRow({ issue }) {
+export default function TaskRow({ issue, parent }) {
+  const handleExpandTask = () => {
+    console.log('running handleExpandTask');
+    const taskRowChildren = document.querySelectorAll(
+      `[data-parent="${issue.id}"]`
+    );
+    if (taskRowChildren) {
+      taskRowChildren.forEach((taskRowChild) => {
+        taskRowChild.classList.toggle('hidden');
+      });
+    }
+  };
+  // if (issue.children) debugger;
   return (
-    <div
-      data-comp="TaskRow"
-      key={`${issue?.id}-${issue.name}`}
-      id={`task_row_header task_row_header-${issue?.id}`}
-      className="gantt_task_row"
-      style={{
-        padding: '0 10px',
-        borderTop: '1px solid var(--color-outline)',
-      }}
-    >
-      <style jsx>{styles}</style>
+    <>
       <div
-        className="gantt_task_row-header"
+        data-comp="TaskRow"
+        key={`${issue?.id}-${issue.name}`}
+        id={`task_row_header task_row_header-${issue?.id}`}
+        data-parent={parent?.id}
+        className={parent ? `gantt_task_row hidden` : 'gantt_task_row'}
         style={{
-          ...customStyles.header,
-          flexBasis: '30%',
-          flex: '1 0 30%',
-          height: '39px',
-          marginTop: '0.25px',
+          padding: '0 10px',
+          borderTop: '1px solid var(--color-outline)',
         }}
       >
-        <Button
-          modifier="ghost"
-          size="icon"
-          className="focusTask"
-          type="button"
-          textContent={<LuScanEye />}
-          ariaLabel={`Focus on task: ${issue?.name}`}
-          data={{
-            id: issue.id,
-          }}
-        ></Button>
+        <style jsx>{styles}</style>
         <div
-          className="taskName"
-          style={{ display: 'flex', alignItems: 'center' }}
+          className="gantt_task_row-header"
+          style={{
+            ...customStyles.header,
+            flexBasis: '30%',
+            flex: '1 0 30%',
+            height: '39px',
+            marginTop: '0.25px',
+          }}
         >
-          {issue?.name}
+          <Button
+            modifier="ghost"
+            size="icon"
+            className="focusTask"
+            type="button"
+            textContent={<LuScanEye />}
+            ariaLabel={`Focus on task: ${issue?.name}`}
+            data={{
+              id: issue.id,
+            }}
+          />
+          <Button
+            modifier="ghost"
+            size="icon"
+            className="focusTask"
+            type="button"
+            onClick={handleExpandTask}
+            textContent={<TbLayoutNavbarExpandFilled />}
+            ariaLabel={`Expand task: ${issue?.name}`}
+            data={{
+              id: issue.id,
+            }}
+          />
+          <div
+            className="taskName"
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            {issue?.name}
+            {issue?.children && ` (Issues: ${issue.children.length})`}
+          </div>
         </div>
       </div>
-    </div>
+      {issue?.children?.map((childIssue, idx) => (
+        <TaskRow key={idx} issue={childIssue} parent={issue} />
+      ))}
+    </>
   );
 }
