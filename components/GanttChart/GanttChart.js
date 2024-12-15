@@ -20,25 +20,48 @@ export default function GanttChart() {
         toSelectYear: '2024',
       });
     })();
-    // Get the issues from the API
+    // Get the issues from the API and handle assigning to the correct project
     (async () => {
+      // Fetch the issues from the API
       const results = await fetch('/api/get/issue').then((response) =>
         response.json()
       );
+      // Placeholder variable for all projects
       const projects = [];
+      // Placeholder project for unassigned issues
+      const unassignedProject = {
+        id: '0',
+        name: 'Project Unassigned',
+        children: [],
+      };
+      // Loop through the results and add the projects to the projects array.
       results.forEach((issue) => {
         if (issue.issue_type === 'PROJ') {
           projects.push(issue);
         }
       });
+      // Loop through the projects and add the children to the project.
       projects.forEach((project) => {
         project.children = [];
+        // Loop through the returned issues and add them as children to the parent project.
         results.forEach((issue) => {
+          // If the issue is a child of the project, add it to the project children array.
           if (issue?.ref_to?.includes(project.id)) {
             project.children.push(issue);
           }
+          if (!issue?.ref_to && issue.issue_type !== 'PROJ') {
+            // Check to make sure the project is not already in the unassigned project
+            const projectExists = unassignedProject.children.find(
+              (child) => child.id === issue.id
+            );
+            // If the project does not exist in the unassigned project, add it.
+            if (!projectExists) {
+              unassignedProject.children.push(issue);
+            }
+          }
         });
       });
+      projects.push(unassignedProject);
       setIssues(projects);
     })();
   }, []);

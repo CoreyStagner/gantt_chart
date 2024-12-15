@@ -1,6 +1,30 @@
 import mongoose from 'mongoose';
 import { connectToDatabase } from '../../../lib/mongodb';
 
+// TODO: Move to Helper Utility
+export const checkEnvironment = () => {
+  let base_url =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://example.com'; // https://v2ds.netlify.app
+
+  return base_url;
+};
+
+// TODO: Move to Helper utility
+const log = async (level, message, options) => {
+  console.log('log(level, message, options)', level, message, options);
+  // const time = Date.now();
+  const endpoint = `${checkEnvironment()}/api/post/log`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: message,
+  });
+
+  return response;
+};
+
 const seeds = [
   {
     name: 'Issue 1',
@@ -28,7 +52,9 @@ const seeds = [
     acceptance_criteria: "This is the first issue's acceptance criteria",
     ref_to: null,
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 2',
@@ -56,7 +82,9 @@ const seeds = [
     acceptance_criteria: "This is the second issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 3',
@@ -84,7 +112,9 @@ const seeds = [
     acceptance_criteria: "This is the third issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 4',
@@ -112,7 +142,9 @@ const seeds = [
     acceptance_criteria: "This is the fourth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-4',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 5',
@@ -140,7 +172,9 @@ const seeds = [
     acceptance_criteria: "This is the fifth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 6',
@@ -168,7 +202,9 @@ const seeds = [
     acceptance_criteria: "This is the sixth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 7',
@@ -196,7 +232,9 @@ const seeds = [
     acceptance_criteria: "This is the seventh issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 8',
@@ -224,7 +262,9 @@ const seeds = [
     acceptance_criteria: "This is the eighth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 9',
@@ -252,7 +292,9 @@ const seeds = [
     acceptance_criteria: "This is the ninth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 10',
@@ -280,7 +322,9 @@ const seeds = [
     acceptance_criteria: "This is the tenth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 11',
@@ -308,7 +352,9 @@ const seeds = [
     acceptance_criteria: "This is the eleventh issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 12',
@@ -336,7 +382,9 @@ const seeds = [
     acceptance_criteria: "This is the twelfth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 13',
@@ -364,7 +412,9 @@ const seeds = [
     acceptance_criteria: "This is the thirteenth issue's acceptance criteria",
     ref_to: ['PROJ-1'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 14',
@@ -392,7 +442,9 @@ const seeds = [
     acceptance_criteria: "This is the fourteenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 15',
@@ -420,7 +472,9 @@ const seeds = [
     acceptance_criteria: "This is the fifteenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 16',
@@ -448,7 +502,9 @@ const seeds = [
     acceptance_criteria: "This is the sixteenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 17',
@@ -476,7 +532,9 @@ const seeds = [
     acceptance_criteria: "This is the seventeenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 18',
@@ -504,7 +562,9 @@ const seeds = [
     acceptance_criteria: "This is the eighteenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 19',
@@ -532,7 +592,9 @@ const seeds = [
     acceptance_criteria: "This is the nineteenth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 20',
@@ -560,7 +622,9 @@ const seeds = [
     acceptance_criteria: "This is the twentieth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 21',
@@ -588,7 +652,9 @@ const seeds = [
     acceptance_criteria: "This is the twenty-first issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 22',
@@ -617,7 +683,9 @@ const seeds = [
       "This is the twenty-second issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 23',
@@ -645,7 +713,9 @@ const seeds = [
     acceptance_criteria: "This is the twenty-third issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 24',
@@ -674,7 +744,9 @@ const seeds = [
       "This is the twenty-fourth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 25',
@@ -702,7 +774,9 @@ const seeds = [
     acceptance_criteria: "This is the twenty-fifth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 26',
@@ -730,7 +804,9 @@ const seeds = [
     acceptance_criteria: "This is the twenty-sixth issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 27',
@@ -759,7 +835,9 @@ const seeds = [
       "This is the twenty-seventh issue's acceptance criteria",
     ref_to: ['PROJ-2'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 28',
@@ -788,7 +866,9 @@ const seeds = [
       "This is the twenty-eighth issue's acceptance criteria",
     ref_to: ['PROJ-3'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 29',
@@ -816,7 +896,9 @@ const seeds = [
     acceptance_criteria: "This is the twenty-ninth issue's acceptance criteria",
     ref_to: ['PROJ-3'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 30',
@@ -844,7 +926,9 @@ const seeds = [
     acceptance_criteria: "This is the thirtieth issue's acceptance criteria",
     ref_to: ['PROJ-3'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Issue 31',
@@ -872,7 +956,9 @@ const seeds = [
     acceptance_criteria: "This is the thirty-first issue's acceptance criteria",
     ref_to: ['PROJ-3'],
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: 1,
   },
   {
     name: 'Project 1',
@@ -900,7 +986,9 @@ const seeds = [
     acceptance_criteria: "This is the thirty-first issue's acceptance criteria",
     ref_to: null,
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: null,
   },
   {
     name: 'Project 2',
@@ -928,7 +1016,9 @@ const seeds = [
     acceptance_criteria: "This is the thirty-first issue's acceptance criteria",
     ref_to: null,
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: null,
   },
   {
     name: 'Project 3',
@@ -956,13 +1046,21 @@ const seeds = [
     acceptance_criteria: "This is the thirty-first issue's acceptance criteria",
     ref_to: null,
     ref_by: null,
-    assigned_iteration: 'ITERATION-1',
+    dependency_to: 'TEST-7',
+    dependency_by: 'TEST-8',
+    assigned_iteration: null,
   },
 ];
 
 const seedDB = async (collection, data) => {
-  await collection.deleteMany({});
-  await collection.insertMany(data || seeds);
+  try {
+    await collection.deleteMany({});
+    await collection.insertMany(data || seeds);
+    console.log('here');
+    log('INFO', 'Database was seeded successfully!', {
+      UUID: '031fcf2f-0a2b-4d73-af68-bc692990f505',
+    });
+  } catch (error) {}
 };
 
 export default async function handler(request, response) {
@@ -972,6 +1070,6 @@ export default async function handler(request, response) {
   );
 
   seedDB(collection, null).then(() => {
-    response.status(200).json('Seeded the database!');
+    response.status(200).json({ message: 'Seeded the database!' });
   });
 }

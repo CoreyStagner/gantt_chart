@@ -58,7 +58,23 @@ const customStyles = {
   },
 };
 
+const sprintData = [
+  {
+    name: 'Sprint 24.1',
+    startDate: '2024-12-01',
+    endDate: '2024-12-14',
+  },
+  {
+    name: 'Sprint 24.2',
+    startDate: '2024-12-15',
+    endDate: '2024-12-28',
+  },
+];
+
 const TimeDuration = ({ issue, timeRange }) => {
+  // dependency_to: Set an alert for the issue that needs to be complete before we start this issue
+  // dependency_by: Set an alert for the issue that needs this issue to be completed before we start that issue
+  // const { dependency_to, dependency_by } = issue;
   // TODO: Implement we can use the day for more granular viewing
   // Configure the time range start and end months
   const startMonth = new Date(
@@ -69,7 +85,16 @@ const TimeDuration = ({ issue, timeRange }) => {
     parseInt(timeRange.toSelectYear),
     timeRange.toSelectMonth
   );
-
+  // Get iteration that the task belongs too if an iteration is given.
+  const iteration =
+    issue.issue_type === 'TASK' ? issue?.assigned_iteration : null;
+  // Set the initial TimeDuration length
+  const iterationStartTime = iteration
+    ? sprintData[iteration - 1]?.startDate
+    : null;
+  const iterationEndTime = iteration
+    ? sprintData[iteration - 1]?.endDate
+    : null;
   // creating rows that span across each month provided in the time range
   let monthRows = [];
   const numMonths = monthDiff(startMonth, endMonth);
@@ -88,7 +113,6 @@ const TimeDuration = ({ issue, timeRange }) => {
 
     let taskRows = [];
     let taskRow = [];
-
     const numDays = getDaysInMonth(curYear, curMonth);
 
     for (let j = 1; j <= numDays; j++) {
@@ -100,25 +124,35 @@ const TimeDuration = ({ issue, timeRange }) => {
       // We will start with one and add how many days the task is so we overcome resolve that we need it to be zero indexed.
       let dateDiff = 1;
       if (issue.startDate && issue.endDate) {
+        let start_y, start_m, start_d, end_y, end_m, end_d;
+        if (iterationStartTime) {
+          // console.log('using sprint date');
+          [start_y, start_m, start_d] = iterationStartTime.split('-');
+        } else {
+          ({ y: start_y, m: start_m, d: start_d } = issue.startDate);
+        }
+        if (iterationEndTime) {
+          [end_y, end_m, end_d] = iterationEndTime.split('-');
+        } else {
+          ({ y: end_y, m: end_m, d: end_d } = issue.endDate);
+        }
         const startDate = new Date(
-          createFormattedDateFromStr(
-            issue.startDate.y,
-            issue.startDate.m,
-            issue.startDate.d
-          )
+          createFormattedDateFromStr(start_y, start_m, start_d)
         );
+
         const endDate = new Date(
-          createFormattedDateFromStr(
-            issue.endDate.y,
-            issue.endDate.m,
-            issue.endDate.d
-          )
+          createFormattedDateFromStr(end_y, end_m, end_d)
         );
         const currentDate = new Date(formattedDate);
         if (startDate.getTime() === currentDate.getTime()) {
           // Found a timeline block for this issue
           timelineBlock = true;
-          dateDiff += issue.endDate.d - issue.startDate.d;
+          // Calculating the time difference of two dates
+          let time_difference = endDate.getTime() - startDate.getTime();
+          // Calculating the no. of days between two dates
+          let day_difference = Math.round(time_difference / (1000 * 3600 * 24));
+
+          dateDiff += day_difference;
         }
       }
       taskRow.push(
@@ -171,6 +205,7 @@ const TimeDuration = ({ issue, timeRange }) => {
         </div>
       );
     }
+
     taskRows.push(
       <div key={`table-rows-${i}-${issue.id}`}>
         <div

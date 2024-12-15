@@ -102,29 +102,35 @@ export default function TaskRow({ issue, parent }) {
             marginTop: '0.25px',
           }}
         >
-          <Button
-            modifier="ghost"
-            size="icon"
-            className="focusTask"
-            type="button"
-            textContent={<LuScanEye />}
-            ariaLabel={`Focus on task: ${issue?.name}`}
-            data={{
-              id: issue.id,
-            }}
-          />
-          <Button
-            modifier="ghost"
-            size="icon"
-            className="focusTask"
-            type="button"
-            onClick={handleExpandTask}
-            textContent={<TbLayoutNavbarExpandFilled />}
-            ariaLabel={`Expand task: ${issue?.name}`}
-            data={{
-              id: issue.id,
-            }}
-          />
+          {/* Provide an indent to the parent */}
+          {parent && <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>}
+          {!parent && (
+            <>
+              <Button
+                modifier="ghost"
+                size="icon"
+                className="focusTask"
+                type="button"
+                textContent={<LuScanEye />}
+                ariaLabel={`Focus on task: ${issue?.name}`}
+                data={{
+                  id: issue.id,
+                }}
+              />
+              <Button
+                modifier="ghost"
+                size="icon"
+                className="focusTask"
+                type="button"
+                onClick={handleExpandTask}
+                textContent={<TbLayoutNavbarExpandFilled />}
+                ariaLabel={`Expand task: ${issue?.name}`}
+                data={{
+                  id: issue.id,
+                }}
+              />
+            </>
+          )}
           <div
             className="taskName"
             style={{ display: 'flex', alignItems: 'center' }}
