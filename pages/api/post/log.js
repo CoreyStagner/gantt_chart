@@ -46,7 +46,7 @@ export default async function handler(request, response) {
     } catch (e) {
       response
         .status(500)
-        .json({ message: 'Something went wrong saving the data!' });
+        .json({ message: 'Something went wrong saving the data!', error: e });
     }
   }
 }

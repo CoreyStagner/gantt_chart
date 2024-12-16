@@ -2,6 +2,12 @@ import { Button } from './../Button/Button';
 import { LuScanEye } from 'react-icons/lu';
 import { TbLayoutNavbarExpandFilled } from 'react-icons/tb';
 
+const colorsMap = {
+  TASK: 'var(--color-deeporange-200)',
+  PROJ: 'var(--color-teal-300)',
+  STORY: 'var(--color-tertiary)',
+};
+
 // TODO: Update the styles, and convert to the custom styles
 const styles = `
   .gantt_task_row {
@@ -89,6 +95,9 @@ export default function TaskRow({ issue, parent }) {
         style={{
           padding: '0 10px',
           borderTop: '1px solid var(--color-outline)',
+          borderLeft: `4px solid ${
+            colorsMap[issue.issue_type] || colorsMap['TASK']
+          }`,
         }}
       >
         <style jsx>{styles}</style>

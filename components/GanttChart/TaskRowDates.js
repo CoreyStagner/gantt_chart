@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   monthDiff,
   getDaysInMonth,
@@ -58,6 +59,12 @@ const customStyles = {
   },
 };
 
+const colorsMap = {
+  TASK: 'var(--color-deeporange-200)',
+  PROJ: 'var(--color-teal-300)',
+  STORY: 'var(--color-tertiary)',
+};
+
 const sprintData = [
   {
     name: 'Sprint 24.1',
@@ -71,7 +78,31 @@ const sprintData = [
   },
 ];
 
-const TimeDuration = ({ issue, timeRange }) => {
+const TimeDuration = ({ issue, timeRange, modalOptions }) => {
+  /**
+   * This function will open the modal for the task that is double clicked.
+   *
+   * @param {HTMLDoubleClickEvent} e
+   * @param {Object} issue reference to the issue
+   * @returns {void}
+   */
+  const handleTimeDurationDoubleClick = (e, issue) => {
+    e.preventDefault();
+    if (!issue) {
+      console.log('No issue provided');
+      return;
+    } else {
+      console.log('Task found', issue);
+      modalOptions.current.set({
+        ...modalOptions.current,
+        isOpen: true,
+        modalID: issue.id,
+      });
+      // Pass the issue to the modal
+    }
+  };
+
+  // TODO: Implement the dependency_to and dependency_by
   // dependency_to: Set an alert for the issue that needs to be complete before we start this issue
   // dependency_by: Set an alert for the issue that needs this issue to be completed before we start that issue
   // const { dependency_to, dependency_by } = issue;
@@ -180,11 +211,12 @@ const TimeDuration = ({ issue, timeRange }) => {
               key={`time-duration-${issue.id}-${Math.random()}`}
               draggable="true"
               tabIndex="0"
+              data-task={issue?.id}
               style={{
                 ...styles.taskDuration,
                 width: `calc(${dateDiff} * 100% - 1px)`,
                 color: 'white',
-                background: 'blue',
+                background: colorsMap[issue.issue_type],
                 fontSize: '0.75rem',
                 display: 'flex',
                 alignItems: 'top',
@@ -194,8 +226,11 @@ const TimeDuration = ({ issue, timeRange }) => {
                 textOverflow: 'ellipsis',
                 alignItems: 'center',
                 height: '40px', // TODO: Should we make this a variable so one change for all?
+                border: '3px solid var(--color-white)',
+                borderRadius: '7px',
+                justifyContent: 'center',
               }}
-              onDoubleClick={(e) => console.log('Double Clicked', e)}
+              onDoubleClick={(e) => handleTimeDurationDoubleClick(e, issue)}
             >
               {issue?.name}
             </div>
@@ -223,7 +258,8 @@ const TimeDuration = ({ issue, timeRange }) => {
   return monthRows;
 };
 
-export default function TaskRow({ issue, timeRange, parent }) {
+export default function TaskRow({ issue, timeRange, parent, modalOptions }) {
+  // Configure the time range start and end months
   const startMonth = new Date(
     parseInt(timeRange.fromSelectYear),
     timeRange.fromSelectMonth
@@ -255,7 +291,11 @@ export default function TaskRow({ issue, timeRange, parent }) {
               display: 'grid',
             }}
           >
-            <TimeDuration issue={issue} timeRange={timeRange} />
+            <TimeDuration
+              issue={issue}
+              timeRange={timeRange}
+              modalOptions={modalOptions}
+            />
           </div>
         </div>
       </div>
@@ -265,6 +305,7 @@ export default function TaskRow({ issue, timeRange, parent }) {
           issue={childIssue}
           timeRange={timeRange}
           parent={issue}
+          modalOptions={modalOptions}
         />
       ))}
     </>

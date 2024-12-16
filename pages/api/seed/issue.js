@@ -33,12 +33,12 @@ const seeds = [
     endDate: {
       y: '2024',
       m: '12',
-      d: '1',
+      d: '20',
     },
     startDate: {
       y: '2024',
       m: '12',
-      d: '1',
+      d: '10',
     },
     issue_type: 'TASK',
     assigned_to: 'EMP01',
@@ -54,7 +54,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: null,
   },
   {
     name: 'Issue 2',
@@ -444,7 +444,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 15',
@@ -474,7 +474,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 16',
@@ -504,7 +504,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 17',
@@ -534,7 +534,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 18',
@@ -564,7 +564,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 19',
@@ -594,7 +594,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 20',
@@ -624,7 +624,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 21',
@@ -654,7 +654,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 22',
@@ -685,7 +685,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 23',
@@ -715,7 +715,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 24',
@@ -746,7 +746,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 25',
@@ -776,7 +776,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 26',
@@ -806,7 +806,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 27',
@@ -837,7 +837,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 2,
   },
   {
     name: 'Issue 28',
@@ -868,7 +868,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 3,
   },
   {
     name: 'Issue 29',
@@ -898,7 +898,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 3,
   },
   {
     name: 'Issue 30',
@@ -928,7 +928,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 3,
   },
   {
     name: 'Issue 31',
@@ -958,7 +958,7 @@ const seeds = [
     ref_by: null,
     dependency_to: 'TEST-7',
     dependency_by: 'TEST-8',
-    assigned_iteration: 1,
+    assigned_iteration: 3,
   },
   {
     name: 'Project 1',
@@ -967,7 +967,7 @@ const seeds = [
     endDate: {
       y: '2024',
       m: '12',
-      d: '13',
+      d: '14',
     },
     startDate: {
       y: '2024',
@@ -997,12 +997,12 @@ const seeds = [
     endDate: {
       y: '2024',
       m: '12',
-      d: '27',
+      d: '28',
     },
     startDate: {
       y: '2024',
       m: '12',
-      d: '14',
+      d: '15',
     },
     issue_type: 'PROJ',
     assigned_to: 'EMP01',

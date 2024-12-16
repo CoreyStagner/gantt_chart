@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Grid from './Grid';
+import Modal from './Modal';
 import TaskRowDates from './TaskRowDates';
 import TaskRowHeader from './TaskRowHeader';
 import TaskTableHeaderContent from './TaskTableHeaderContent';
@@ -8,7 +9,16 @@ import TaskTableHeaderDates from './TaskTableHeaderDates';
 export default function GanttChart() {
   const [timeRange, setTimeRange] = useState({});
   const [issues, setIssues] = useState([]);
-
+  const [_modalOptions, _setModalOptions] = useState(false);
+  const modalOptions = useRef({});
+  // Update the modal options each time the local state changes
+  useEffect(() => {
+    modalOptions.current = {
+      isOpen: _modalOptions.isOpen,
+      modalID: _modalOptions,
+      set: (v) => _setModalOptions(v),
+    };
+  }, [_modalOptions, _setModalOptions]);
   // Get Issues from the API
   useEffect(() => {
     // Set the time range to the current month and year to one month in the future.
@@ -68,6 +78,7 @@ export default function GanttChart() {
 
   return (
     <div id="gantt-container" style={{ width: '100%' }}>
+      <Modal options={_modalOptions} />
       <Grid>
         <div className="header" style={{ flex: '0 0 30%' }}>
           <TaskTableHeaderContent />
@@ -83,7 +94,12 @@ export default function GanttChart() {
         <div className="times" style={{ flex: '0 0 70%', overflowX: 'scroll' }}>
           <TaskTableHeaderDates timeRange={timeRange} />
           {issues.map((issue, i) => (
-            <TaskRowDates key={i} issue={issue} timeRange={timeRange} />
+            <TaskRowDates
+              key={i}
+              issue={issue}
+              timeRange={timeRange}
+              modalOptions={modalOptions}
+            />
           ))}
         </div>
       </Grid>
