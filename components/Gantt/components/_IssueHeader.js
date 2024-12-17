@@ -89,7 +89,7 @@ export default function IssueHeader({ issues }) {
                 }}
               >
                 {/* This will be the Focus on the selected issue */}
-                {issue.issue_type ? (
+                {/* {issue.issue_type ? (
                   <IconButton
                     size="small"
                     aria-label={`Focus on task: ${issue?.name}`}
@@ -100,7 +100,7 @@ export default function IssueHeader({ issues }) {
                   <IconButton size="small" aria-label="" aria-hidden="true">
                     <EmptyButtonDiv />
                   </IconButton>
-                )}
+                )} */}
                 {/* This will be the expand/collapse button or the child arrow */}
                 {issue.children ? (
                   <IconButton

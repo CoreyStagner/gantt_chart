@@ -73,7 +73,6 @@ const customStyles = {
 
 export default function TaskRow({ issue, parent }) {
   const handleExpandTask = () => {
-    console.log('running handleExpandTask');
     const taskRowChildren = document.querySelectorAll(
       `[data-parent="${issue.id}"]`
     );

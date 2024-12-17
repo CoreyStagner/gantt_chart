@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid2';
-// import Button from '../../Button/Button';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { CiCirclePlus, CiCircleMinus } from 'react-icons/ci';
@@ -15,9 +15,77 @@ const Item = styled('div')(({ theme }) => ({
   textAlign: 'center',
 }));
 
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function GanttBody() {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
   return (
     <div id="gantt">
+      {/* Create custom component for this. */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box sx={modalStyle}>
+          <Typography id="modal-title" variant="h6" component="h2">
+            Create New Issue
+          </Typography>
+          <Typography id="modal-description" sx={{ mt: 2 }}>
+            Fill in the fields below to create a new issue.
+          </Typography>
+          <Box sx={{ mt: 2 }}>
+            <div>
+              Issue Name:
+              <input />
+            </div>
+            <div>
+              Assigned To:
+              <input />
+            </div>
+            <div>
+              Start Date:
+              <input />
+            </div>
+            <div>
+              End Date:
+              <input />
+            </div>
+            <div>
+              Summary:
+              <input />
+            </div>
+            <div>
+              Issue Type:
+              <input />
+            </div>
+            <div>
+              Description:
+              <input />
+            </div>
+            <div>
+              Iteration:
+              <input />
+            </div>
+          </Box>
+          <Button variant="contained" size="large" onClick={handleClose}>
+            Create Issue
+          </Button>
+        </Box>
+      </Modal>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
           <Grid
@@ -28,7 +96,7 @@ export default function GanttBody() {
               alignItems: 'center',
             }}
           >
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" onClick={handleOpen}>
               Create New Issue
             </Button>
           </Grid>
