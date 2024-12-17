@@ -32,7 +32,29 @@ export default css.global`
   }
 
   .hidden {
+    display: none !important;
+  }
+
+  /* Handle the scroll bars on the Grid */
+  #gantt_grid_body::-webkit-scrollbar {
     display: none;
+  }
+  #gantt_grid_body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  #gantt_grid-header::-webkit-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-white) var(--color-white);
+  }
+  #gantt_grid-header::-webkit-scrollbar-track {
+    background: var(--color-gray-200);
+  }
+  #gantt_grid-header::-webkit-scrollbar-thumb {
+    background-color: var(--color-white);
+    border-radius: 20px;
+    border: 3px solid var(--color-white);
   }
 
   :root {

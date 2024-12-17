@@ -17,7 +17,12 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-export default function GanttHeader() {
+export default function GanttHeader({
+  timeRange,
+  gridHeaderRef,
+  handleXScroll,
+}) {
+  if (!timeRange) return;
   return (
     <div id="gantt_header">
       <Box sx={{ flexGrow: 1 }}>
@@ -26,7 +31,11 @@ export default function GanttHeader() {
             <ControlPanel />
           </Grid>
           <Grid size={9}>
-            <GridHeader />
+            <GridHeader
+              timeRange={timeRange}
+              gridHeaderRef={gridHeaderRef}
+              handleXScroll={handleXScroll}
+            />
           </Grid>
         </Grid>
       </Box>

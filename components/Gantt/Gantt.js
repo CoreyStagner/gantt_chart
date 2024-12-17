@@ -20,21 +20,24 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Gantt() {
   const [timeRange, setTimeRange] = useState({});
   const [issues, setIssues] = useState([]);
-  const [_modalOptions, _setModalOptions] = useState(false);
-  const modalOptions = useRef({});
-  // Update the modal options each time the local state changes
-  useEffect(() => {
-    modalOptions.current = {
-      isOpen: _modalOptions.isOpen,
-      modalID: _modalOptions,
-      set: (v) => _setModalOptions(v),
-    };
-  }, [_modalOptions, _setModalOptions]);
+  const [projects, setProjects] = useState([]);
+
+  const gridHeaderRef = useRef();
+  const gridBodyRef = useRef();
+
+  const handleGridHeaderScroll = (scroll) => {
+    gridBodyRef.current.scrollLeft = scroll.target.scrollLeft;
+  };
+
+  const handleGridBodyScroll = (scroll) => {
+    gridHeaderRef.current.scrollLeft = scroll.target.scrollLeft;
+  };
+
   // Get Issues from the API
   useEffect(() => {
-    // Set the time range to the current month and year to one month in the future.
+    // By Default, set the time range to the current month and year to one month in the future.
     (async () => {
-      setTimeRange({
+      await setTimeRange({
         fromSelectMonth: new Date().getMonth() + 0,
         fromSelectYear: '2024',
         toSelectMonth: new Date().getMonth() + 1,
@@ -91,6 +94,7 @@ export default function Gantt() {
           return +a.id.split('-')[1] - +b.id.split('-')[1];
         }
       });
+      setProjects(sortedProjects);
       const issueCollection = [];
       // Organize the issues for each Project by the issue number
       sortedProjects.forEach((project) => {
@@ -119,7 +123,7 @@ export default function Gantt() {
         });
       });
       if (issueCollection.length) {
-        setIssues(issueCollection);
+        await setIssues(issueCollection);
       }
     })();
   }, []);
@@ -129,10 +133,20 @@ export default function Gantt() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
           <Grid size={12}>
-            <GanttHeader timeRange={timeRange} />
+            <GanttHeader
+              timeRange={timeRange}
+              gridHeaderRef={gridHeaderRef}
+              handleXScroll={handleGridHeaderScroll}
+            />
           </Grid>
           <Grid size={12}>
-            <GanttBody issues={issues} />
+            <GanttBody
+              issues={issues}
+              projects={projects}
+              timeRange={timeRange}
+              gridBodyRef={gridBodyRef}
+              handleXScroll={handleGridBodyScroll}
+            />
           </Grid>
         </Grid>
       </Box>

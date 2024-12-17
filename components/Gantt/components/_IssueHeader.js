@@ -24,8 +24,8 @@ const IssueContainer = styled('div')(({ theme }) => ({
  */
 const IssueNameDiv = styled('div')(({ theme }) => ({
   width: '100%',
-  height: '40px',
-  lineHeight: '40px',
+  height: '39.35px',
+  lineHeight: '39.35px',
 }));
 /**
  * Styled Component for the container that takes up the space of a button
@@ -57,8 +57,12 @@ export default function IssueHeader({ issues }) {
   const handleToggleIssue = (issue) => {
     console.log('toggling', issue);
     const taskRowChildren = document.querySelectorAll(`.child-${issue.id}`);
-    if (taskRowChildren) {
-      taskRowChildren.forEach((taskRowChild) => {
+    const taskGridChildren = document.querySelectorAll(
+      `.task_row_header_child_of-${issue.id}`
+    );
+    console.log(taskRowChildren, taskGridChildren);
+    if (taskRowChildren || taskGridChildren) {
+      [...taskRowChildren, ...taskGridChildren].forEach((taskRowChild) => {
         taskRowChild.classList.toggle('hidden');
       });
     }

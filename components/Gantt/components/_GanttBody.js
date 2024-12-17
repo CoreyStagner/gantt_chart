@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 // Custom Component Imports
 import IssueHeader from './_IssueHeader';
+import IssueGrid from './_IssueGrid';
 // Stylized Components
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -20,7 +21,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // Exported Components
-export default function GanttBody({ issues }) {
+export default function GanttBody({
+  issues,
+  timeRange,
+  projects,
+  gridBodyRef,
+  handleXScroll,
+}) {
   // Resolved HTML
   return (
     <div id="gantt">
@@ -29,8 +36,16 @@ export default function GanttBody({ issues }) {
           <Grid size={3}>
             <IssueHeader issues={issues} />
           </Grid>
-          <Grid size={9}>
-            <Item>Issue Grid</Item>
+          <Grid
+            id="gantt_grid_body"
+            size={9}
+            style={{ overflowX: 'scroll' }}
+            ref={gridBodyRef}
+            onScroll={handleXScroll}
+          >
+            {projects.map((issue) => (
+              <IssueGrid issue={issue} timeRange={timeRange} />
+            ))}
           </Grid>
         </Grid>
       </Box>
