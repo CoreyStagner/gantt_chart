@@ -1,3 +1,5 @@
+import { days } from '../constants';
+
 export function monthDiff(firstMonth, lastMonth) {
   let months;
   months = (lastMonth.getFullYear() - firstMonth.getFullYear()) * 12;
@@ -23,6 +25,49 @@ export function getDayOfWeek(year, month, day) {
   return daysOfTheWeekArr[dayOfTheWeekIndex];
 }
 
+export function createObjFromFormattedDate(dateStr, daysOffset) {
+  if (!dateStr) {
+    console.log(
+      '[ERR] createObjFromFormattedDate: Date not formatted correctly.'
+    );
+    return 'DATE_ERROR';
+  }
+  const date = new Date(dateStr);
+  if (daysOffset) {
+    date.setDate(date.getDate() + daysOffset);
+    return {
+      y: date.getFullYear(),
+      m: date.getMonth() - 1,
+      d: date.getDate(),
+    };
+  } else {
+    const dateArr = dateStr.split('-');
+    return {
+      y: parseInt(dateArr[0]),
+      m: parseInt(dateArr[1]),
+      d: parseInt(dateArr[2]),
+    };
+  }
+}
+export function createFormattedDateFromObj(dateObj) {
+  console.log(dateObj);
+  if (!dateObj || !dateObj.y || !dateObj.m || !dateObj.d) {
+    console.log(
+      '[ERR] createFormattedDateFromObj: Date not formatted correctly.'
+    );
+    return 'DATE_ERROR';
+  }
+  let monthStr = dateObj.m.toString();
+  let dayStr = dateObj.d.toString();
+
+  if (monthStr.length === 1) {
+    monthStr = `0${monthStr}`;
+  }
+  if (dayStr.length === 1) {
+    dayStr = `0${dayStr}`;
+  }
+  return `${dateObj.y}-${monthStr}-${dayStr}`;
+}
 export function createFormattedDateFromStr(year, month, day) {
   if (!year || !month || !day) {
     // console.log(

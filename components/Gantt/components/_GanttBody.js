@@ -44,7 +44,7 @@ export default function GanttBody({
             onScroll={handleXScroll}
           >
             {projects.map((issue) => (
-              <IssueGrid issue={issue} timeRange={timeRange} />
+              <IssueGrid issue={issue} timeRange={timeRange} key={issue.id} />
             ))}
           </Grid>
         </Grid>

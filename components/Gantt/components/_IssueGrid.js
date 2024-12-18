@@ -4,10 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 // Helper Function Imports
 import {
+  dayDiff,
   monthDiff,
   getDaysInMonth,
   getDayOfWeek,
   createFormattedDateFromStr,
+  createFormattedDateFromObj,
+  createObjFromFormattedDate,
   getDateTimeObject,
 } from '../../../helpers/dateFunctions';
 
@@ -84,7 +87,59 @@ const customStyles = {
   },
 };
 
+const handleUpdateTaskStartEndDates = (issue, newDate) => {
+  // Get initial diff in days between start and end date
+  const initialDiff = dayDiff(
+    createFormattedDateFromObj(issue.startDate),
+    createFormattedDateFromObj(issue.endDate)
+  );
+  // Create new start and end date objects
+  const updatedStartDate = createObjFromFormattedDate(newDate);
+  const updatedEndDate = createObjFromFormattedDate(newDate, initialDiff);
+  // Create new object with updated start and end dates
+  const updatedIssue = {
+    ...issue,
+    startDate: updatedStartDate,
+    endDate: updatedEndDate,
+  };
+
+  // post data to API
+  fetch(`/api/update/issue/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedIssue),
+  }).then((response) => {
+    if (response.ok) {
+      console.log('Task updated successfully');
+    } else {
+      console.error('Task update failed');
+    }
+  });
+};
+
 const TimeDuration = ({ issue, timeRange }) => {
+  const [dragging, setDragging] = useState(false);
+  const [over, setOver] = useState(undefined);
+  const handleDrag = (e) => {
+    setDragging(true);
+  };
+  const handleDragOver = (e) => {
+    if (!e.target.dataset.date) return;
+    setOver({
+      task: e.target.dataset.task,
+      date: e.target.dataset.date,
+    });
+    e.stopPropagation();
+    e.preventDefault();
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    console.log('update issue', issue.id, 'to', over.date);
+    handleUpdateTaskStartEndDates(issue, over.date);
+    // TODO: Update the issue with the new date
+    setDragging(false);
+    setOver(undefined);
+  };
   /**
    * This function will open the modal for the task that is double clicked.
    *
@@ -163,7 +218,6 @@ const TimeDuration = ({ issue, timeRange }) => {
       if (issue.startDate && issue.endDate) {
         let start_y, start_m, start_d, end_y, end_m, end_d;
         if (iterationStartTime) {
-          // console.log('using sprint date');
           [start_y, start_m, start_d] = iterationStartTime.split('-');
         } else {
           ({ y: start_y, m: start_m, d: start_d } = issue.startDate);
@@ -196,11 +250,15 @@ const TimeDuration = ({ issue, timeRange }) => {
         <div
           data-comp="TimeDuration"
           key={`${issue.id}-${j}`}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
           style={{
             ...customStyles.ganttTimePeriodCell,
             backgroundColor:
-              j === currentDate.day &&
-              startMonth.getMonth() + 1 + i === currentDate.month
+              over?.task === issue?.id && over?.date === formattedDate
+                ? 'var(--color-red-transparent-33)'
+                : j === currentDate.day &&
+                  startMonth.getMonth() + 1 + i === currentDate.month
                 ? 'var(--color-red-transparent-33)'
                 : dayOfTheWeek === 'S'
                 ? 'var(--color-tertiary)'
@@ -216,6 +274,7 @@ const TimeDuration = ({ issue, timeRange }) => {
             <div
               key={`time-duration-${issue.id}-${Math.random()}`}
               draggable="true"
+              onDrag={handleDrag}
               tabIndex="0"
               data-task={issue?.id}
               style={{
@@ -224,7 +283,7 @@ const TimeDuration = ({ issue, timeRange }) => {
                 color: 'white',
                 background: colorsMap[issue.issue_type],
                 fontSize: '0.75rem',
-                display: 'flex',
+                display: dragging ? 'none' : 'flex',
                 alignItems: 'top',
                 overflow: 'hidden',
                 position: 'relative',

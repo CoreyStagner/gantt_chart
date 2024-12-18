@@ -55,12 +55,10 @@ export default function IssueHeader({ issues }) {
    * @param {Object} issue The issue that is being toggled.
    */
   const handleToggleIssue = (issue) => {
-    console.log('toggling', issue);
     const taskRowChildren = document.querySelectorAll(`.child-${issue.id}`);
     const taskGridChildren = document.querySelectorAll(
       `.task_row_header_child_of-${issue.id}`
     );
-    console.log(taskRowChildren, taskGridChildren);
     if (taskRowChildren || taskGridChildren) {
       [...taskRowChildren, ...taskGridChildren].forEach((taskRowChild) => {
         taskRowChild.classList.toggle('hidden');
