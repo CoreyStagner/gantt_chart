@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  DndContext,
-  DragEndEvent,
-  useDroppable,
-  useDraggable,
-} from '@dnd-kit/core';
+import { DndContext, useDroppable, useDraggable } from '@dnd-kit/core';
 
 const COLUMNS = [
   { id: 'TODO', title: 'To Do' },
@@ -40,10 +35,11 @@ const INITIAL_TASKS = [
 ];
 
 const Card = ({ task, key }) => {
+  // From useDraggable hook, set the ref, attributes, listeners, and transform logic to update styling.
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: task.id,
   });
-
+  // Update Styles based on the transform object location.
   const style = transform
     ? {
         padding: '8px',
@@ -70,7 +66,9 @@ const Card = ({ task, key }) => {
 };
 
 const Column = ({ key, column, tasks }) => {
+  // From useDroppable hook, set the ref and a boolean of if it is hovering that.
   const { setNodeRef, isOver } = useDroppable({ id: column.id });
+  // Set custom styles based on if it is hovering.
   const style = {
     backgroundColor: 'lightgrey',
     borderRadius: '15px',
@@ -101,7 +99,9 @@ export default function App() {
     if (!over) return;
 
     // Get Local variables
+    // What is dropped
     const taskId = active.id;
+    // Where is it getting dropped.
     const newStatus = over.id;
 
     // Update Tasks
@@ -120,6 +120,7 @@ export default function App() {
   return (
     <div style={{ padding: '15px' }}>
       <div style={{ display: 'flex', gap: '8px' }}>
+        {/* Set the dropzone */}
         <DndContext onDragEnd={handleDragEnd}>
           {COLUMNS.map((column) => {
             return (
