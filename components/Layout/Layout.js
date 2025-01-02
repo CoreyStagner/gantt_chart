@@ -8,8 +8,6 @@ function Layout(props) {
 
   // validate user
   const validateUser = async () => {
-    // const isValid = async () => {
-    console.log('\n\n\n\n\n\n\n\nTesting validation\n\n\n\n\n\n\n');
     const response = await fetch(
       process.env.SENTINAL_AUTHENTICATION_URL ||
         'https://localhost:3041/api/auth/sso/validate',
@@ -20,10 +18,7 @@ function Layout(props) {
       }
     )
       .then((r) => r)
-      .then((r2) => {
-        console.log('r2', r2);
-        return r2;
-      });
+      .then((r2) => r2);
 
     return response;
   };

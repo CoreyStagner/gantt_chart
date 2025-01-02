@@ -39,9 +39,9 @@ export default function Gantt() {
     (async () => {
       await setTimeRange({
         fromSelectMonth: new Date().getMonth() + 0,
-        fromSelectYear: '2024',
+        fromSelectYear: '2025',
         toSelectMonth: new Date().getMonth() + 1,
-        toSelectYear: '2024',
+        toSelectYear: '2025',
       });
     })();
     // Get the issues from the API and handle assigning to the correct project

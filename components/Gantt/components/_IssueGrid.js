@@ -346,7 +346,6 @@ export default function IssueGrid({ issue, timeRange, parent }) {
     timeRange.toSelectMonth
   );
   const numMonths = monthDiff(startMonth, endMonth) + 1;
-
   // Resolved HTML
   return (
     <div id="gantt_issueGrid">
