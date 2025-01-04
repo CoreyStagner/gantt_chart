@@ -1,6 +1,9 @@
 import globalStyles from '../../styles/global.js';
 import { useEffect, useState } from 'react';
 
+// TODO: HACK: used only for preventing auth for dev purposes. Remove this when we have working env variables.
+const dev_PreventAuth = true;
+
 function Layout(props) {
   // TODO: work on getting this to work with gantt_tracker app so that we can use a central auth server. Will also need to set up roles for each app.
   const [isUserValid, setIsUserValid] = useState(false);
@@ -8,13 +11,17 @@ function Layout(props) {
 
   // validate user
   const validateUser = async () => {
+    // TODO: Figure out why process.env values are not working. Temp resolve is dev_PreventAuth variable
+    if (process.env.NEXT_LOCAL_AUTH_TYPE || 'dev' === 'dev') {
+      return JSON.stringify({ isValid: 'VALID' });
+    }
     const response = await fetch(
-      process.env.SENTINAL_AUTHENTICATION_URL ||
-        'https://localhost:3041/api/auth/sso/validate',
+      process.env.NEXT_LOCAL_SENTINAL_AUTHENTICATION_URL ||
+        'https://localhost:3042/api/auth/sso/validate',
       {
         method: 'POST',
         key: 'Access-Control-Allow-Origin',
-        value: 'https://localhost:3041',
+        value: 'https://localhost:3042',
       }
     )
       .then((r) => r)
@@ -26,11 +33,13 @@ function Layout(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        let isValid = await validateUser()
-          .then((r) => r.json())
-          .then((r2) => {
-            return r2;
-          });
+        let isValid = dev_PreventAuth
+          ? 'VALID'
+          : await validateUser()
+              .then((r) => r.json())
+              .then((r2) => {
+                return r2;
+              });
 
         if (!isValid || isValid.toUpperCase() === 'UNAUTHORIZED') {
           setIsUserValid(false);

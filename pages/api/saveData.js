@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { data } = req.body;
 
-    const client = new MongoClient(process.env.MONGODB_URI, {
+    const client = new MongoClient(process.env.NEXT_LOCAL_MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

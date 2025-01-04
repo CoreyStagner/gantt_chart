@@ -2,11 +2,11 @@ import { connectToDatabase } from '../../../lib/mongodb';
 
 export default async function handler(request, response) {
   const { database } = await connectToDatabase(
-    process.env.MONGO_DB_LOG_DATABASE
+    process.env.NEXT_LOCAL_MONGO_DB_LOG_DATABASE
   );
   let errors = [];
   const collection = database.collection(
-    process.env.MONGO_DB_LOG_COLLECTION_WARN
+    process.env.NEXT_LOCAL_MONGO_DB_LOG_COLLECTION_WARN
   );
 
   if (request.method !== 'POST') {

@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_LOCAL_MONGO_DB_URI:
+      'mongodb+srv://coreystagnerllc:QNtHF0B8IINDxYnv@realm.cbjgs.mongodb.net/?retryWrites=true&w=majority&appName=realm',
+    NEXT_LOCAL_MONGO_DB_DATABASE: 'realm',
+    NEXT_LOCAL_MONGO_DB_ISSUES_COLLECTION: 'issues',
+    NEXT_LOCAL_MONGO_DB_LOG_DATABASE: 'log',
+    NEXT_LOCAL_MONGO_DB_LOG_COLLECTION_WARN: 'log',
+    NEXT_LOCAL_AUTH_TYPE: 'dev',
+  },
   reactStrictMode: true,
   swcMinify: true,
-  // fs: false,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+
+    return config;
+  },
   async headers() {
     return [
       {

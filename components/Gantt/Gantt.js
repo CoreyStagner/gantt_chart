@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
-export default function Gantt() {
+export default function Gantt({ localData, writeLocalData }) {
   const [timeRange, setTimeRange] = useState({});
   const [issues, setIssues] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -46,10 +46,18 @@ export default function Gantt() {
     })();
     // Get the issues from the API and handle assigning to the correct project
     (async () => {
-      // Fetch the issues from the API
-      const results = await fetch('/api/get/issue').then((response) =>
-        response.json()
-      );
+      let results;
+      // TODO: HACK: This is used to decide if the data is coming from local JSON file or a DB. Remove this when we have working env variables.
+      const dev_datasource = localData ? 'local' : false;
+      if (dev_datasource === 'local') {
+        results = localData;
+      } else {
+        // Fetch the issues from the API
+        results = await fetch('/api/get/issue').then((response) =>
+          response.json()
+        );
+      }
+      if (!results?.length) return;
       // Placeholder variable for all projects
       const projects = [];
       // Placeholder project for unassigned issues
@@ -126,7 +134,7 @@ export default function Gantt() {
         await setIssues(issueCollection);
       }
     })();
-  }, []);
+  }, [localData]);
 
   return (
     <div id="gantt">
@@ -146,6 +154,7 @@ export default function Gantt() {
               timeRange={timeRange}
               gridBodyRef={gridBodyRef}
               handleXScroll={handleGridBodyScroll}
+              writeLocalData={writeLocalData}
             />
           </Grid>
         </Grid>

@@ -26,6 +26,7 @@ export function getDayOfWeek(year, month, day) {
 }
 
 export function createObjFromFormattedDate(dateStr, daysOffset) {
+  console.log(dateStr, daysOffset);
   if (!dateStr) {
     console.log(
       '[ERR] createObjFromFormattedDate: Date not formatted correctly.'
@@ -37,7 +38,7 @@ export function createObjFromFormattedDate(dateStr, daysOffset) {
     date.setDate(date.getDate() + daysOffset);
     return {
       y: date.getFullYear(),
-      m: date.getMonth() - 1,
+      m: date.getMonth() + 1, // to resolve the zero index that new Date uses
       d: date.getDate(),
     };
   } else {

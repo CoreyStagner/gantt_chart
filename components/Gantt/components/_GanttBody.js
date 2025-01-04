@@ -27,6 +27,7 @@ export default function GanttBody({
   projects,
   gridBodyRef,
   handleXScroll,
+  writeLocalData,
 }) {
   // Resolved HTML
   return (
@@ -44,7 +45,13 @@ export default function GanttBody({
             onScroll={handleXScroll}
           >
             {projects.map((issue) => (
-              <IssueGrid issue={issue} timeRange={timeRange} key={issue.id} />
+              <IssueGrid
+                issue={issue}
+                timeRange={timeRange}
+                key={issue.id}
+                issues={issues}
+                writeLocalData={writeLocalData}
+              />
             ))}
           </Grid>
         </Grid>

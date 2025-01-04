@@ -4,7 +4,7 @@ import { connectToDatabase } from '../../../lib/mongodb';
 // TODO: Move to Helper Utility
 export const checkEnvironment = () => {
   let base_url =
-    process.env.NODE_ENV === 'development'
+    process.env.NEXT_LOCAL_NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://example.com'; // https://v2ds.netlify.app
 
@@ -1066,7 +1066,7 @@ const seedDB = async (collection, data) => {
 export default async function handler(request, response) {
   const { database } = await connectToDatabase();
   const collection = database.collection(
-    process.env.MONGO_DB_ISSUES_COLLECTION
+    process.env.NEXT_LOCAL_MONGO_DB_ISSUES_COLLECTION
   );
 
   seedDB(collection, null).then(() => {

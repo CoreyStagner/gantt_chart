@@ -4,7 +4,7 @@ export default async function handler(request, response) {
   const { database } = await connectToDatabase();
   let errors = [];
   const collection = database.collection(
-    process.env.MONGO_DB_ISSUES_COLLECTION
+    process.env.NEXT_LOCAL_MONGO_DB_ISSUES_COLLECTION
   );
 
   if (request.method !== 'POST') {

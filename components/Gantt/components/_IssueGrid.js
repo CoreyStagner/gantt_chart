@@ -87,7 +87,42 @@ const customStyles = {
   },
 };
 
-const handleUpdateTaskStartEndDates = (issue, newDate) => {
+const handleReplacingLocalIssue = async (newIssue, issues, writeLocalData) => {
+  const updatedIssues = issues.map((issue) => {
+    if (issue.id === newIssue.id) {
+      return newIssue;
+    }
+    return issue;
+  });
+
+  if (writeLocalData) {
+    writeLocalData(updatedIssues);
+  }
+  // try {
+  //   const response = await fetch('/api/gantt/update', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ updatedIssues }),
+  //   });
+
+  //   if (response.ok) {
+  //     console.log('File written successfully');
+  //   } else {
+  //     console.error('Error writing file');
+  //   }
+  // } catch (error) {
+  //   console.error('Error:', error);
+  // }
+};
+
+const handleUpdateTaskStartEndDates = (
+  issue,
+  newDate,
+  issues,
+  writeLocalData
+) => {
   // Get initial diff in days between start and end date
   const initialDiff = dayDiff(
     createFormattedDateFromObj(issue.startDate),
@@ -103,21 +138,28 @@ const handleUpdateTaskStartEndDates = (issue, newDate) => {
     endDate: updatedEndDate,
   };
 
-  // post data to API
-  fetch(`/api/update/issue/`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updatedIssue),
-  }).then((response) => {
-    if (response.ok) {
-      console.log('Task updated successfully');
-    } else {
-      console.error('Task update failed');
-    }
-  });
+  // TODO: HACK: This is used to decide if the data is coming from local JSON file or a DB. Remove this when we have working env variables.
+  const localData = true;
+  const dev_datasource = localData ? 'local' : false;
+  if (dev_datasource === 'local') {
+    handleReplacingLocalIssue(updatedIssue, issues, writeLocalData);
+  } else {
+    // post data to API
+    fetch(`/api/update/issue/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedIssue),
+    }).then((response) => {
+      if (response.ok) {
+        console.log('Task updated successfully');
+      } else {
+        console.error('Task update failed');
+      }
+    });
+  }
 };
 
-const TimeDuration = ({ issue, timeRange }) => {
+const TimeDuration = ({ issue, timeRange, issues, writeLocalData }) => {
   const [dragging, setDragging] = useState(false);
   const [over, setOver] = useState(undefined);
   const handleDrag = (e) => {
@@ -134,8 +176,7 @@ const TimeDuration = ({ issue, timeRange }) => {
   };
   const handleDrop = (e) => {
     e.preventDefault();
-    console.log('update issue', issue.id, 'to', over.date);
-    handleUpdateTaskStartEndDates(issue, over.date);
+    handleUpdateTaskStartEndDates(issue, over.date, issues, writeLocalData);
     // TODO: Update the issue with the new date
     setDragging(false);
     setOver(undefined);
@@ -251,7 +292,7 @@ const TimeDuration = ({ issue, timeRange }) => {
           data-comp="TimeDuration"
           key={`${issue.id}-${j}`}
           onDragOver={handleDragOver}
-          onDrop={handleDrop}
+          onDrop={(e) => handleDrop(e)}
           style={{
             ...customStyles.ganttTimePeriodCell,
             backgroundColor:
@@ -333,7 +374,13 @@ const TimeDuration = ({ issue, timeRange }) => {
  * @param {Array} props.issues The issues that are being passed to the component.
  * @returns {JSX.Element} The JSX code for the Issue Header.
  */
-export default function IssueGrid({ issue, timeRange, parent }) {
+export default function IssueGrid({
+  issue,
+  timeRange,
+  parent,
+  issues,
+  writeLocalData,
+}) {
   // Helper Functions used by this component
 
   // Configure the time range start and end months
@@ -372,7 +419,12 @@ export default function IssueGrid({ issue, timeRange, parent }) {
               display: 'grid',
             }}
           >
-            <TimeDuration issue={issue} timeRange={timeRange} />
+            <TimeDuration
+              issue={issue}
+              timeRange={timeRange}
+              issues={issues}
+              writeLocalData={writeLocalData}
+            />
           </div>
         </div>
       </div>
@@ -382,6 +434,8 @@ export default function IssueGrid({ issue, timeRange, parent }) {
           issue={childIssue}
           timeRange={timeRange}
           parent={issue}
+          issues={issues}
+          writeLocalData={writeLocalData}
         />
       ))}
     </div>
